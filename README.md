@@ -12,7 +12,6 @@ Deeders:
 - Phong Trinh Ha [thpandaz](https://github.com/thpandaz)
 - Gabriel Laboy [glaboy02](https://github.com/glaboy02)
 - Cameron Proulx [0xPorkchops](https://github.com/0xPorkchops)
-- Aryan Pothanaboyina [aryan-pothanaboyina](https://github.com/aryan-pothanaboyina)
 
 ## Instructions
 
