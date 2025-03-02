@@ -12,6 +12,7 @@ Deeders:
 - Phong Trinh Ha [thpandaz](https://github.com/thpandaz)
 - Gabriel Laboy [glaboy02](https://github.com/glaboy02)
 - Cameron Proulx [0xPorkchops](https://github.com/0xPorkchops)
+- Jacob Beaumont [jcbeaumont22](https://github.com/jcbeaumont22)
 
 ## Instructions
 
