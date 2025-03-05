@@ -1,33 +1,26 @@
-# `Turborepo` Vite starter
+# CS 426: `GoodDeed`
 
-This is a community-maintained example. If you experience a problem, please submit a pull request with a fix. GitHub Issues will be closed.
+Volunteers often struggle to find relevant, local, or time-flexible opportunities, while smaller organizations lack the resources to reach and coordinate with potential volunteers.
 
-## Using this example
+So, we decided to create aggregating volunteer opportunities in one place !!!
 
-Run the following command:
 
-```sh
-npx create-turbo@latest -e with-vite
-```
+## Team Name
 
-## What's inside?
+Deeders:
+
+- Phong Trinh Ha [thpandaz](https://github.com/thpandaz)
+- Gabriel Laboy [glaboy02](https://github.com/glaboy02)
+- Cameron Proulx [0xPorkchops](https://github.com/0xPorkchops)
+- Jacob Beaumont [jcbeaumont22](https://github.com/jcbeaumont22)
+
+## Instructions
 
 This Turborepo includes the following packages and apps:
 
-### Apps and Packages
+### Dependencies
 
-- `docs`: a vanilla [vite](https://vitejs.dev) ts app
-- `web`: another vanilla [vite](https://vitejs.dev) ts app
-- `@repo/ui`: a stub component & utility library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: shared `eslint` configurations
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Sprints
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- Sprint 1: Vision Board (Completed)
+- Sprint 2: Organize (Pending)
