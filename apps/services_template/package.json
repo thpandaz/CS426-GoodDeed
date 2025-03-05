@@ -1,0 +1,30 @@
+{
+  "name": "services_template",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0",
+    "test": "jest --detectOpenHandles"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "vite": "6.2.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0"
+  }
+}
