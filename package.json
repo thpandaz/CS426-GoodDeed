@@ -16,5 +16,12 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "overrides": {
+    "vite": "^5.1.4"
+  },
+  "dependencies": {
+    "esbuild-register": "^3.6.0",
+    "nodemon": "^3.1.9"
+  }
 }
