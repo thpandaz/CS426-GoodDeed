@@ -1,6 +1,6 @@
 {
-    "extends": "@repo/typescript-config/vite.json",
-    "include": ["src"],
-    "exclude": []
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true
+  }
 }
-  
