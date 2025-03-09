@@ -1,6 +1,7 @@
 import React from "react";
-import "../css/navbar.css"; // Ensure you have a corresponding CSS file
+import "../css/navbar.css"; // CSS for navbar
 
+// Creates a super simple Nav Bar with links and button
 export const NavBar: React.FC = () => {
     return (
         <nav className="navbar">
