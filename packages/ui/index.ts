@@ -6,4 +6,5 @@ export { Header } from "./components/header";
 export { Counter } from "./components/counter";
 export { NavBar } from "./components/navbar";
 export { Banner } from "./components/banner";
+export { LandingCard } from "./components/landingcard";
 

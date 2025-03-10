@@ -1,16 +1,16 @@
 import React from "react";
 import "../css/banner.css"; 
-import logo from "../assets/cs-426-logo.svg";
 
 
 interface BannerProps {
     tagline: string;
+    imgSrc: string;
 }
 
-export const Banner: React.FC<BannerProps> = ({ tagline }) => {
+export const Banner: React.FC<BannerProps> = ({ tagline, imgSrc }) => {
     return (
         <div className="banner">
-            <img src={logo} alt="logo" />
+            <img src={ imgSrc } alt="logo" />
             <h1 className="tagline">{tagline}</h1>
         </div>
     );
