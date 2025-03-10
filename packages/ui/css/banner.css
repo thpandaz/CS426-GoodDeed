@@ -1,0 +1,25 @@
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;         
+    background-color: #f9dbc5; 
+    padding: 100px;       
+    box-sizing: border-box;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    border-bottom: 4px solid #333;
+    
+}
+
+.banner img {
+    max-width: 600px;     
+    margin-right: 20px;  
+}
+
+.banner tagline {
+    display: inline-block;
+    font-size: 30px;
+    color: #333;          
+}
