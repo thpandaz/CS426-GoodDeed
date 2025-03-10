@@ -12,7 +12,7 @@ export const NavBar: React.FC = () => {
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <button className="navbar-button" onClick={() => alert("Sign Up Clicked!")}>Sign Up</button>
+        <button className="navbabunr-button" onClick={() => alert("Sign Up Clicked!")}>Sign Up</button>
         </nav>
     );
 };
