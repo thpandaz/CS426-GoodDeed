@@ -23,4 +23,5 @@ This Turborepo includes the following packages and apps:
 ### Sprints
 
 - Sprint 1: Vision Board (Completed)
-- Sprint 2: Organize (Pending)
+- Sprint 2: Organize (Completed)
+- Sprint 3: Initialize UI (Pending)
