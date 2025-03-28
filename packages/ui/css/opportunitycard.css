@@ -1,0 +1,36 @@
+.opportunity-card {
+    background-color: #242424;
+    color: rgba(255, 255, 255, 0.87);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #333;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+.opportunity-card-heading {
+    font-weight: bold;
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+}
+
+.opportunity-card-subheading {
+    font-size: 0.875rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+
+.opportunity-card-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.opportunity-card-label {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #444;
+    border: 1px solid #666;
+    border-radius: 9999px;
+}

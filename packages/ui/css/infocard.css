@@ -1,0 +1,20 @@
+.info-card {
+    background-color: #1e1e1e;
+    color: rgba(255, 255, 255, 0.87);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #333;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+.info-card-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.info-card-body {
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
