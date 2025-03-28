@@ -11,10 +11,13 @@ export const NavBar: React.FC = () => {
         <ul className="navbar-links">
             <li><Link to="/main">Home</Link></li>
             <li><Link to="/explorePage">Explore</Link></li>
+
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <button className="navbar-button" onClick={() => alert("Sign Up Clicked!")}>Sign Up</button>
         </nav>
     );
+
 };
+

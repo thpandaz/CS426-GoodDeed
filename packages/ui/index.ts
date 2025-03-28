@@ -9,3 +9,4 @@ export { Footer } from "./components/footer";
 export { ExploreSection } from "./components/exploresection";
 export { OpportunityCard } from "./components/opportunitycard";
 export { InfoCard } from "./components/infocard";
+
