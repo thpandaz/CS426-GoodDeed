@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./style.css";
 import typescriptLogo from "/typescript.svg";
-import { Header, Counter, NavBar } from "@repo/ui";
+import { Header, Counter, NavBar } from "@repo/ui-web";
 
 const App = () => (
   <div>

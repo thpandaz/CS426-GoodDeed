@@ -1,26 +1,47 @@
 {
-  "name": "@repo/ui",
+  "name": "@repo/ui-web",
   "version": "0.0.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": "./index.ts",
-    "./counter": "./components/counter.tsx",
-    "./header": "./components/header.tsx",
-    "./setup-counter": "./utils/counter.ts"
+    "./globals.css": "./src/styles/globals.css",
+    "./postcss.config": "./postcss.config.mjs",
+    "./lib/*": "./src/lib/*.ts",
+    "./components/*": "./src/components/*.tsx",
+    "./hooks/*": "./src/hooks/*.ts"
   },
   "license": "MIT",
   "scripts": {
     "lint": "eslint \"**/*.ts\""
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@radix-ui/react-slot": "^1.1.2",
+    "autoprefixer": "^10.4.21",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.475.0",
+    "next-themes": "^0.4.4",
+    "postcss": "^8.5.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss": "^4.0.14",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@repo/tailwind-config": "workspace:*",
     "eslint": "^8.57.0",
-    "typescript": "5.5.4"
+    "@tailwindcss/postcss": "^4.0.8",
+    "@turbo/gen": "^2.4.2",
+    "@types/node": "^20",
+    "tailwindcss": "^4.0.8",
+    "typescript": "^5.7.3"
   }
 }
