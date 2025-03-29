@@ -23,6 +23,7 @@
   "dependencies": {
     "esbuild-register": "^3.6.0",
     "nodemon": "^3.1.9",
+    "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^7.4.0"
   }
 }
