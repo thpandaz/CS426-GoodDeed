@@ -6,4 +6,5 @@ export * from "./exploresection";
 export * from "./infocard";
 export * from "./opportunitycard";
 export * from "./landingcard";
+export * from "./reviewcarousel";
 
