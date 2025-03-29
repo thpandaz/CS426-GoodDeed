@@ -1,11 +1,23 @@
-.landing-card { 
+.card-left { 
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 50vw;
+    width: 90%;
     border-radius: 10px;      
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    align-self: flex-start; /* Move to the left */
+}
+
+.card-right { 
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    width: 90%;
+    border-radius: 10px;      
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    align-self: flex-end; /* Move to the right */
 }
 
 /* Stack the cards vertically */
@@ -15,24 +27,15 @@
     width: 100%; 
 }
 
-/* Ensure left and right positioning works */
-.card-left {
-    align-self: flex-start; /* Move to the left */
-}
-
-.card-right {
-    align-self: flex-end; /* Move to the right */
-}
-
 .landing-card img {
-    max-width: 30vw;      
+    max-width: 55%;      
     margin-right: 20px; 
     border-radius: 10px;  
 }
 
 .description {
     display: inline-block;
-    font-size: 2vw;
-    line-height: 24pt;
+    font-size: 4vw;
+    line-height: 48pt;
     color: #e1e1e1;           
 }
