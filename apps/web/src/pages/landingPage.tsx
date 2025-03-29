@@ -7,14 +7,6 @@ import landingcard1 from "../../../native/assets/landingcard1.jpg"
 import landingcard2 from "../../../native/assets/landingcard2.jpg"
 
 export default function LandingPage() {
-    const responsive = {
-        desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3, slidesToSlide: 3 },
-        tablet: { breakpoint: { max: 1024, min: 464 }, items: 2, slidesToSlide: 2 },
-        mobile: { breakpoint: { max: 464, min: 0 }, items: 1, slidesToSlide: 1 }
-    };
-
-    // Detect device type dynamically (if needed)
-    const isMobile = window.innerWidth < 464;
 
     return (
         <div className="landing-container">
