@@ -16,7 +16,7 @@ export default function LandingPage() {
                     <LandingCard imgSrc={landingcard1} description="The <strong>better solution</strong> for the next generation." className="card-left" />
                     <LandingCard imgSrc={landingcard2} description="<strong>Be the Change—One Click at a Time</strong>: Fuel Gen Z Volunteerism to Transform Communities and Shape a Brighter Future." className="card-right" />
                 </div>
-                <h2 style={{ textAlign: 'left', color: 'white', fontSize: '2vw', fontWeight: 'bold' }}>
+                <h2 style={{ textAlign: 'left', color: 'white', fontSize: '2vw', fontWeight: 'bold', paddingBottom: '30px' }}>
                     Don't just take it from us — hear from those who matter most!
                 </h2>
                 <Carousel
