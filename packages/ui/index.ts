@@ -10,4 +10,5 @@ export { ExploreSection } from "./components/exploresection";
 export { OpportunityCard } from "./components/opportunitycard";
 export { InfoCard } from "./components/infocard";
 export { Banner } from "./components/banner";
+export { LandingCard } from "./components/landingcard";
 
