@@ -4,12 +4,24 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
-    "turbo": "^2.4.4"
+    "turbo": "^2.4.4",
+    "storybook": "^8.6.11",
+    "@storybook/react": "^8.6.11",
+    "@storybook/react-vite": "^8.6.11",
+    "@storybook/addon-essentials": "^8.6.11",
+    "@storybook/blocks": "^8.6.11",
+    "@storybook/test": "^8.6.11",
+    "@storybook/addon-onboarding": "^8.6.11",
+    "@chromatic-com/storybook": "^3",
+    "@storybook/addon-interactions": "^8.6.11",
+    "prop-types": "^15.8.1"
   },
   "name": "with-vite",
   "packageManager": "bun@1.1.29",
