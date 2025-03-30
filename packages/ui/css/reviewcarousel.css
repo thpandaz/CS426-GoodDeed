@@ -1,0 +1,12 @@
+.carousel-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.carousel-item {
+    min-width: 300px; /* Ensure proper spacing */
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+}

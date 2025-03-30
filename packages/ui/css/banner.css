@@ -1,0 +1,36 @@
+.banner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+}
+
+.banner-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the entire area */
+    z-index: -1; /* Ensure video stays behind text */
+}
+
+.banner img {
+    padding-left: 75px;
+    padding-right: 75px;
+    padding-top: 50px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 3.2vw;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
