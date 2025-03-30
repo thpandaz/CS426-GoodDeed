@@ -1,5 +1,4 @@
-import React from "react";
-import { Footer, ExploreSection, OpportunityCard, InfoCard } from "@repo/ui";
+import { Footer, ExploreSection, OpportunityCard, InfoCard } from "@repo/ui-web";
 import "./css/explorePage.css";
 
 export default function ExplorePage() {

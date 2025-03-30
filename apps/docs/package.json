@@ -10,7 +10,7 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
-    "@repo/ui": "*"
+    "@repo/ui-web": "workspace:*"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

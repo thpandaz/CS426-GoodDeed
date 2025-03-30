@@ -1,4 +1,4 @@
-import { Banner, Footer, LandingCard, ReviewCarousel } from "@repo/ui";
+import { Banner, Footer, LandingCard, ReviewCarousel } from "@repo/ui-web";
 import landingcard1 from "../../../native/assets/landingcard1.jpg"
 import landingcard2 from "../../../native/assets/landingcard2.jpg"
 import "./css/landingPage.css";
