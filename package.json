@@ -4,12 +4,15 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "storybook": "turbo run storybook --filter=docs",
+    "build-storybook": "turbo run build-storybook --filter=docs"
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
-    "prettier": "^3.5.3",
-    "turbo": "^2.4.4"
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "turbo": "^2.4.4",
+    "prop-types": "^15.8.1"
   },
   "name": "with-vite",
   "packageManager": "bun@1.1.29",
