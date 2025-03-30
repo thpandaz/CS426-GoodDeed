@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { NavBar } from "@repo/ui";
+import { NavBar } from "@repo/ui-web";
 import ExplorePage from "./pages/explorePage";
 import LandingPage from "./pages/landingPage";
 import "./style.css";
