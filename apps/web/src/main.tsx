@@ -1,26 +1,20 @@
-import { createRoot } from "react-dom/client";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { NavBar } from "@repo/ui";
+import ExplorePage from "./pages/explorePage";
+import LandingPage from "./pages/landingPage";
 import "./style.css";
-import typescriptLogo from "/typescript.svg";
-import { Header, Counter, NavBar } from "@repo/ui-web";
 
-const App = () => (
-  <div>
-    <NavBar></NavBar>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" className="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img
-        src={typescriptLogo}
-        className="logo vanilla"
-        alt="TypeScript logo"
-      />
-    </a>
-    <Header title="Web" />
-    <div className="card">
-      <Counter />
-    </div>
-  </div>
+ReactDOM.createRoot(document.getElementById("app")!).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/explorePage" element={<ExplorePage />} />
+        <Route path="/main" element={<LandingPage />}/>
+      </Routes>
+      
+    </BrowserRouter>
+  </React.StrictMode>
 );
-
-createRoot(document.getElementById("app")!).render(<App />);
