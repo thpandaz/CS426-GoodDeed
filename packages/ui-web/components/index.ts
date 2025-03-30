@@ -1,5 +1,5 @@
 export * from "./header";
-export * from "./counter";
+export * from "../lib/counter";
 export * from "./navbar";
 export * from "./footer";
 export * from "./exploresection";
