@@ -7,7 +7,9 @@
     "dev": "vite --clearScreen false",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint \"src/**/*.ts\""
+    "lint": "eslint \"src/**/*.ts\"",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@repo/ui-web": "workspace:*"
@@ -17,6 +19,15 @@
     "@repo/typescript-config": "*",
     "eslint": "^8.57.0",
     "typescript": "5.5.4",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "storybook": "^8.6.11",
+    "@storybook/react": "^8.6.11",
+    "@storybook/react-vite": "^8.6.11",
+    "@storybook/addon-essentials": "^8.6.11",
+    "@storybook/blocks": "^8.6.11",
+    "@storybook/test": "^8.6.11",
+    "@storybook/addon-onboarding": "^8.6.11",
+    "@chromatic-com/storybook": "^3",
+    "@storybook/addon-interactions": "^8.6.11"
   }
 }
