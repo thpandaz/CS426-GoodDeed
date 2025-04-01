@@ -5,7 +5,7 @@ export default function ExplorePage() {
     return (
         <div className="explore-container">
             <div className="explore-content">
-                <header className="explore-header">Welcome Back, User</header>
+                <header className="explore-heade">Welcome Back, User</header>
 
                 <ExploreSection title="Opportunity picks for you" subtitle="Subheading">
                     <div className="explore-grid">
