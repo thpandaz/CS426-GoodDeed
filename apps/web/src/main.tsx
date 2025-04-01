@@ -10,6 +10,7 @@ ReactDOM.createRoot(document.getElementById("app")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <NavBar />
+      
       <Routes>
         <Route path="/explorePage" element={<ExplorePage />} />
         <Route path="/main" element={<LandingPage />}/>
