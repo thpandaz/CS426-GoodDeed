@@ -1,6 +1,9 @@
 @import "tailwindcss";
+@import "@repo/design/theme.css";
+@source "../node_modules/@repo/ui-web";
 
 @plugin "tailwindcss-animate";
+
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -18,19 +21,6 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --border: 0, 0%, 80%;          /* light gray */
-  --input: 0, 0%, 100%;           /* white */
-  --ring: 45, 100%, 80%;          /* a soft yellow ring */
-
-  --primary-foreground: 210, 20%, 20%;   /* dark shade for primary foreground */
-  --secondary-foreground: 0, 0%, 100%;     /* white for secondary foreground */
-  --accent-foreground: 0, 0%, 100%;        /* white for accent foreground */
-  --destructive-foreground: 0, 0%, 100%;   /* white for destructive actions */
-  --muted-foreground: 0, 0%, 45%;          /* medium gray */
-  --popover: 0, 0%, 100%;                  /* white popover background */
-  --popover-foreground: 210, 20%, 20%;     /* dark popover text */
-  --card: 0, 0%, 100%;                     /* white card background */
-  --card-foreground: 210, 20%, 20%;        /* dark card text */
 }
 
 a {

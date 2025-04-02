@@ -1,14 +1,14 @@
 // utils
 
 // components
-export { Header } from "./components/header";
-export { Counter } from "./lib/counter";
-export { NavBar } from "./components/navbar";
-export { Footer } from "./components/footer";
-export { ExploreSection } from "./components/exploresection";
-export { OpportunityCard } from "./components/opportunitycard";
-export { InfoCard } from "./components/infocard";
-export { Banner } from "./components/banner";
-export { LandingCard } from "./components/landingcard";
-export { ReviewCarousel } from "./components/reviewcarousel";
+export { Header } from "./src/components/header";
+export { Counter } from "./src/lib/counter";
+export { NavBar } from "./src/components/navbar";
+export { Footer } from "./src/components/footer";
+export { ExploreSection } from "./src/components/exploresection";
+export { OpportunityCard } from "./src/components/opportunitycard";
+export { InfoCard } from "./src/components/infocard";
+export { Banner } from "./src/components/banner";
+export { LandingCard } from "./src/components/landingcard";
+export { ReviewCarousel } from "./src/components/reviewcarousel";
 

@@ -14,4 +14,3 @@ export { default as IntroVideo } from './videos/gooddeed.mp4';
 // ============================
 // Other Assets
 // ============================
-export { default as themeValues} from './theme'

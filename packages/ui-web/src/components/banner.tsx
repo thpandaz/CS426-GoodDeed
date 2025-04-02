@@ -11,7 +11,7 @@ interface BannerProps {
 export const Banner: React.FC<BannerProps> = ({ tagline }) => {
     return (
         <div className="banner">
-            <video autoPlay loop muted className="banner-video">
+            <video autoPlay loop muted className="banner-video text-red-500">
                 <source src={IntroVideo} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>

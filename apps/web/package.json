@@ -10,20 +10,22 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
-    "@repo/ui-web": "workspace:*",
     "@repo/assets": "workspace:*",
+    "@repo/design": "workspace:*",
+    "@repo/ui-web": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
-    "@vitejs/plugin-react": "^3.1.0",
+    "@vitejs/plugin-react": "^4.1.0",
     "eslint": "^8.57.0",
-    "typescript": "5.5.4",
     "tailwindcss": "^4.0.8",
+    "typescript": "5.5.4",
     "vite": "^5.1.4"
   }
 }
