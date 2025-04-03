@@ -1,7 +1,7 @@
 import 'react-multi-carousel/lib/styles.css';
 import '../css/reviewcarousel.css'
 import Carousel from 'react-multi-carousel';
-import { OpportunityCard } from './opportunitycard';
+import { OpportunityCard } from './Opportunitycard';
 
 export const ReviewCarousel: React.FC = () => {
     return (
