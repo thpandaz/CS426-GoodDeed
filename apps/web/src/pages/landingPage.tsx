@@ -1,4 +1,5 @@
-import { Banner, Footer, LandingCard, ReviewCarousel } from "@repo/ui-web";
+import { Footer, LandingCard, ReviewCarousel } from "@repo/ui-web";
+import Hero from "@repo/ui-web/components/Hero";
 import {LandingCard1, LandingCard2} from "@repo/assets"
 
 import "./css/landingPage.css";
@@ -7,7 +8,7 @@ export default function LandingPage() {
 
     return (
         <div className="landing-container ">
-            <Banner tagline="Connecting Hearts, Changing Lives" />
+            <Hero />
             <div className="landing-content">
                 <div className="cards-container">
                     <LandingCard imgSrc={LandingCard1} description="The <strong>better solution</strong> for the next generation." className="card-left" />
