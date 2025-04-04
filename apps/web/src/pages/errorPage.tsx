@@ -3,7 +3,8 @@
 import type React from "react"
 import { useEffect } from "react"
 import { useParams, useSearchParams, useNavigate } from "react-router-dom"
-import { AlertTriangle } from "lucide-react"
+import { AlertTriangle } from "@repo/ui-web"
+import { Button } from "@repo/ui-web/components/ui/button"
 
 const ErrorPage: React.FC = () => {
   const { status: urlStatus } = useParams<{ status?: string }>()
@@ -34,26 +35,25 @@ const ErrorPage: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 text-center">
       <div className="mb-8">
-        <AlertTriangle className="h-24 w-24 text-red-500 mx-auto mb-6" />
-        <h1 className="text-6xl font-bold text-red-500 mb-2">{status}</h1>
+        <AlertTriangle className="h-24 w-24 text-primary mx-auto mb-6" />
+        <h1 className="text-6xl font-bold text-primary mb-2">{status}</h1>
         <h2 className="text-2xl font-semibold mb-4">{message}</h2>
-        <p className="text-gray-500 max-w-md mx-auto">
-          We apologize for the inconvenience. Please try again later or return to the homepage.
-        </p>
       </div>
       <div className="flex gap-4">
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+        <Button
+          variant="outline"
+          className="px-4 py-2 rounded"
           onClick={() => navigate("/")}
         >
           Return Home
-        </button>
-        <button
-          className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition-colors"
+        </Button>
+        <Button
+          variant="default"
+          className="px-4 py-2 rounded"
           onClick={() => navigate(-1)}
         >
           Go Back
-        </button>
+        </Button>
       </div>
     </div>
   )

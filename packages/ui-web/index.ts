@@ -1,3 +1,4 @@
+import "lucide-react"
 // utils
 
 // components
@@ -12,3 +13,5 @@ export { Banner } from "./components/banner";
 export { LandingCard } from "./components/landingcard";
 export { ReviewCarousel } from "./components/reviewcarousel";
 
+// icons
+export * from "lucide-react";
