@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "@repo/ui-web/components/navbar";
 import ExplorePage from "./pages/explorePage";
 import LandingPage from "./pages/landingPage";
+import ErrorPage from "./pages/errorPage";
 
 function App() {
     return (
@@ -17,6 +18,9 @@ function App() {
                     <Route path="/universities" element={<div>Universities Page</div>} />
                     <Route path="/about" element={<div>About Page</div>} />
                     <Route path="/signin" element={<div>Sign In Page</div>} />
+                    <Route path="/error/:status" element={<ErrorPage />} />
+                    <Route path="/error" element={<ErrorPage />} />
+                    <Route path="*" element={<ErrorPage />} />                
                 </Routes>
             </div>
         </BrowserRouter>
