@@ -70,7 +70,7 @@ export const NavBar = () => {
           >
             Sign In
           </Link>
-          <Button className="bg-primary-500 hover:bg-primary-600 text-white rounded-full px-6 transition-transform hover:scale-105">
+          <Button className="bg-primary-500/80 hover:bg-primary-500 text-white rounded-full px-6 transition-transform hover:scale-105">
             Get Started
           </Button>
 
