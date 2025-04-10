@@ -14,3 +14,5 @@ export { default as IntroVideo } from './videos/gooddeed.mp4';
 // ============================
 // Other Assets
 // ============================
+const img_voluteer = "https://taprootfoundation.org/static/marketing/production/updated-home-banner.78900c6aea34.webp";
+export const volunteerImage = img_voluteer;

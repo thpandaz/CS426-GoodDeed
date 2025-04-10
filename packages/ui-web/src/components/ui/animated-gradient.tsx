@@ -37,13 +37,13 @@ export function AnimatedGradient({
     <div ref={containerRef} className={cn("relative overflow-hidden", containerClassName)}>
         <div
             className={cn(
-                "absolute inset-0 bg-gradient-to-br from-accent-300/30 via-white/100 to-highlight-300/30 opacity-80 blur-[100px] transition-opacity duration-500 ease-in-out group-hover:opacity-90",
+                "absolute inset-0 bg-gradient-to-br via-background/100 to-highlight-300/50 opacity-80 blur-[10px] transition-opacity duration-500 ease-in-out group-hover:opacity-90",
                 "animate-gradient-fast",
                 className,
             )}
             style={{
                 backgroundPosition: "var(--x-pos, 0) var(--y-pos, 0)",
-                backgroundSize: "200% 200%",
+                backgroundSize: "100% 100%",
             }}
         />
         {children}

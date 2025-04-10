@@ -6,13 +6,14 @@ import { Building2, ChevronRight, Heart, Search } from "lucide-react"
 import { motion } from "framer-motion"
 import { AnimatedCounter } from "./ui/animated-counter"
 import { AnimatedGradient } from "./ui/animated-gradient"
+import {volunteerImage} from "@repo/assets"
 
 export default function Hero() {
   return (
     <AnimatedGradient containerClassName="w-full py-44 md:py-48 lg:py-52">
       <section className="relative z-10">
         <motion.div
-          className="absolute top-20 left-[10%] w-64 h-64 bg-primary-300 rounded-full opacity-30 blur-[80px]"
+          className="absolute top-20 left-[10%] w-64 h-64 bg-primary-200 rounded-full opacity-30 blur-[80px]"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -25,7 +26,7 @@ export default function Hero() {
         />
 
         <motion.div
-          className="absolute bottom-20 right-[10%] w-80 h-80 bg-highlight-300 rounded-full opacity-30 blur-[80px]"
+          className="absolute bottom-20 right-[10%] w-80 h-80 bg-highlight-200 rounded-full opacity-30 blur-[80px]"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -39,7 +40,7 @@ export default function Hero() {
         />
 
         <motion.div
-          className="absolute top-[40%] right-[30%] w-72 h-72 bg-accent-300 rounded-full opacity-30 blur-[80px]"
+          className="absolute top-[40%] right-[30%] w-72 h-72 bg-accent-200 rounded-full opacity-30 blur-[80px]"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -114,65 +115,100 @@ export default function Hero() {
             <div className="flex justify-center">
               <div className="relative mx-auto">
                 <motion.div
-                  className="relative h-[350px] w-[350px] md:h-[400px] md:w-[400px]"
+                  className="relative h-[350px] w-[350px] md:h-[450px] md:w-[550px] lg:h-[500px] lg:w-[600px] rounded-2xl"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <img
-                    src="https://placehold.co/400"
-                    alt="Volunteers helping in the community"
-                    width={400}
-                    height={400}
-                    className="rounded-2xl object-cover shadow-xl w-full h-full"
-                  />
-                  <motion.div className="absolute inset-0 rounded-2xl border-2 border-highlight/30" />
+                  <motion.div
+                    animate={{
+                      y: [0, -15, 0],
+                    }}
+                    transition={{
+                      duration: 6,
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatType: "reverse",
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <img
+                      src={volunteerImage}
+                      alt="Volunteers helping in the community"
+                      width={400}
+                      height={400}
+                      className="rounded-2xl object-cover shadow-3xl w-full h-full"
+                    />
+                  </motion.div>
                 </motion.div>
                 <motion.div
-                  className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg"
-                  initial={{ opacity: 0, x: -20, y: 20 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="bg-accent-100 p-2 rounded-full">
-                      <Building2 className="h-5 w-5 text-accent-500" />
+                    animate={{
+                      y: [0, -5, 0],
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatType: "reverse",
+                      ease: "easeInOut",
+                      delay: 1,
+                    }}>
+                  <motion.div
+                    className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg"
+                    initial={{ opacity: 0, x: -20, y: 20 }}
+                    animate={{ opacity: 1, x: 0, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="bg-accent-100 p-2 rounded-full">
+                        <Building2 className="h-5 w-5 text-accent-500" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-secondary-500">
+                          <AnimatedCounter
+                            value={10000}
+                            duration={1000}
+                            formatter={(val) => `${val.toLocaleString()}+`}
+                          />
+                        </p>
+                        <p className="text-xs text-secondary-400">Organizations</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-secondary-500">
-                        <AnimatedCounter
-                          value={10000}
-                          duration={1000}
-                          formatter={(val) => `${val.toLocaleString()}+`}
-                        />
-                      </p>
-                      <p className="text-xs text-secondary-400">Organizations</p>
-                    </div>
-                  </div>
+                    </motion.div>
                 </motion.div>
                 <motion.div
-                  className="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-lg"
-                  initial={{ opacity: 0, x: 20, y: -20 }}
-                  animate={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                  whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="bg-highlight-100 p-2 rounded-full">
-                      <Heart className="h-5 w-5 text-highlight" />
+                    animate={{
+                      y: [0, 10, 0],
+                    }}
+                    transition={{
+                      duration: 4.5,
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatType: "reverse",
+                      ease: "easeInOut",
+                      delay: 0.5,
+                    }}>
+                  <motion.div
+                    className="absolute -top-135 -right-6 bg-white p-4 rounded-xl shadow-lg"
+                    initial={{ opacity: 0, x: 20, y: -20 }}
+                    animate={{ opacity: 1, x: 0, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="bg-highlight-100 p-2 rounded-full">
+                        <Heart className="h-5 w-5 text-highlight" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-secondary-500">
+                          <AnimatedCounter
+                            value={1000000}
+                            duration={1000}
+                            formatter={(val) => `${val / 1000000}M+`}
+                          />
+                        </p>
+                        <p className="text-xs text-secondary-400">Hours Donated</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-secondary-500">
-                        <AnimatedCounter
-                          value={1000000}
-                          duration={1000}
-                          formatter={(val) => `${val / 1000000}M+`}
-                        />
-                      </p>
-                      <p className="text-xs text-secondary-400">Hours Donated</p>
-                    </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               </div>
             </div>
