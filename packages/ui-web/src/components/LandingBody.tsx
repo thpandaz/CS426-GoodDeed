@@ -3,6 +3,7 @@
 import { ScrollReveal } from "./ui/scroll-reveal"
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@ui/lib/utils"
+import StickyFeatures from "./StickyFeatures"
 
 const DynamicEllipse = () => (
   <div className="absolute inset-0 z-10">
@@ -17,9 +18,9 @@ const DynamicEllipse = () => (
 
 export default function LandingBody() {
   return (
-    <section className="relative w-full py-12 md:py-8 lg:py-16">
+    <section className="relative w-full -mt-10 py-12 md:py-8 lg:py-16">
       <DynamicEllipse />
-      <div className="container w-full mt-18 md:mt-20 lg:mt-14  z-20 bg-linear-180 from-custom-orange-50 to-background">
+      <div className=" w-full mt-18 md:mt-20 lg:mt-14 z-20 bg-linear-180 from-custom-orange-50 to-background">
         <ScrollReveal>
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -30,7 +31,7 @@ export default function LandingBody() {
                 Be the Change, One Click at a Time
               </h2>
               <p className="max-w-[700px] text-muted-foreground md:text-xl">
-                Thousands of nonprofits and community organizations use VolunteerMatch to find dedicated volunteers.
+                Thousands of nonprofits and community organizations use GoodDeed to find dedicated volunteers.
               </p>
             </div>
           </div>
@@ -58,7 +59,9 @@ export default function LandingBody() {
             </ScrollReveal>
           ))}
         </div>
+
       </div>
+      <StickyFeatures />
     </section>
   )
 }

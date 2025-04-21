@@ -10,7 +10,7 @@ import {volunteerImage} from "@repo/assets"
 
 export default function Hero() {
   return (
-    <AnimatedGradient containerClassName="w-full py-44 md:py-48 lg:py-52 overflow-hidden">
+    <AnimatedGradient containerClassName="w-full py-50 md:py-56 lg:py-60 overflow-hidden">
       <section className="relative z-10">
         {/* <motion.div
           className="absolute top-20 left-[10%] w-64 h-64 bg-primary-200 rounded-full opacity-30 blur-[80px]"
@@ -54,7 +54,7 @@ export default function Hero() {
         /> */}
 
         {/* Removed lg:text-left so text stays centered on all screens */}
-        <div className="container mx-auto px-4 md:px-6 -mt-18">
+        <div className="container mx-auto px-4 md:px-6 -mt-16">
           <div className="grid gap-4 pl-10 lg:grid-cols-2 lg:gap-12 items-center justify-items-center">
             <motion.div
               className="space-y-4"
