@@ -11,16 +11,16 @@ const DynamicEllipse = () => (
       className="absolute -top-[4rem] left-1/2 transform -translate-x-1/2 from-white from-50% to-transparent bg-gradient-to-b h-[12rem] w-full clip-ellipse"
     />
     <div
-      className="absolute -top-[4rem] left-1/2 transform -translate-x-1/2 from-orange-300 to-custom-orange-50 bg-gradient-to-b h-[12rem] w-full clip-ellipse"
+      className="absolute -top-[4rem] left-1/2 transform -translate-x-1/2 from-orange-400 to-custom-orange-100 bg-gradient-to-b h-[12rem] w-full clip-ellipse"
     />
   </div>
 )
 
 export default function LandingBody() {
   return (
-    <section className="relative w-full -mt-10 py-12 md:py-8 lg:py-16">
+    <section className="relative w-full -mt-10 pt-12 md:pt-8 lg:pt-16">
       <DynamicEllipse />
-      <div className=" w-full mt-18 md:mt-20 lg:mt-14 z-20 bg-linear-180 from-custom-orange-50 to-background">
+      <div className=" w-full mt-18 md:mt-20 lg:mt-14 z-20 h-120 bg-linear-180 from-custom-orange-100 to-background">
         <ScrollReveal>
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -61,7 +61,7 @@ export default function LandingBody() {
         </div>
 
       </div>
-      <StickyFeatures />
+        <StickyFeatures />
     </section>
   )
 }

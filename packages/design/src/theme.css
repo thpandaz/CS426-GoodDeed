@@ -6,8 +6,8 @@
     --color-ring: oklch(var(--ring));
 
     /* Fixed Base Colors */
-    --color-background: #fcfbf7;
-    --color-foreground: #1e3a3a;
+    /* --color-background: #fcfbf7;
+    --color-foreground: #1e3a3a; */
 
     /* Primary Palette */
     --color-primary: oklch(72.57% 0.278 36.35);
@@ -87,8 +87,9 @@
     --color-text-900: oklch(10.00% 0.042 195.61);
     --color-text-950: oklch(5.00% 0.044 195.61);
 
-    --background: oklch(98.77% 0.005 95.10);
-    --foreground: oklch(32.64% 0.034 195.61);
+    --color-background: oklch(98.77% 0.005 95.10);
+    --color-background-600: oklch(92.00% 0.010 95.10);
+    --color-foreground: oklch(32.64% 0.034 195.61);
 
     /* Optional: Add oklch equivalents for smoother integration */
     --color-custom-orange: oklch(70.88% 0.25 65);     /* #fb8500 */
@@ -119,6 +120,11 @@
     --color-custom-blue-700: oklch(45% 0.12 225);
     --color-custom-blue-800: oklch(35% 0.10 225);
     --color-custom-blue-900: oklch(25.76% 0.06 258);  /* ≈ #023047 */
+
+    --breakpoint-2xs: '20rem';
+    --breakpoint-xs: '25rem';
+    --breakpoint-2sm: '30rem';
+
 
 }
 
