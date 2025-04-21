@@ -90,6 +90,36 @@
     --background: oklch(98.77% 0.005 95.10);
     --foreground: oklch(32.64% 0.034 195.61);
 
+    /* Optional: Add oklch equivalents for smoother integration */
+    --color-custom-orange: oklch(70.88% 0.25 65);     /* #fb8500 */
+    --color-custom-orange-light: oklch(84.28% 0.14 85); /* #ffb703 */
+    --color-custom-blue-dark: oklch(25.76% 0.06 258);  /* #023047 */
+    --color-custom-blue-mid: oklch(66.36% 0.14 225);   /* #219ebc */
+    --color-custom-blue-light: oklch(85.35% 0.09 227); /* #8ecae6 */
+
+    /* Additional shades if you want to extend this palette */
+    --color-custom-orange-50: oklch(96% 0.08 65);
+    --color-custom-orange-100: oklch(90% 0.15 65);
+    --color-custom-orange-200: oklch(84% 0.18 65);
+    --color-custom-orange-300: oklch(78% 0.20 65);
+    --color-custom-orange-400: oklch(72% 0.23 65);
+    --color-custom-orange-500: oklch(70.88% 0.25 65); /* ≈ #fb8500 */
+    --color-custom-orange-600: oklch(65% 0.24 65);
+    --color-custom-orange-700: oklch(58% 0.22 65);
+    --color-custom-orange-800: oklch(51% 0.20 65);
+    --color-custom-orange-900: oklch(44% 0.18 65);
+
+    --color-custom-blue-50: oklch(96% 0.02 230);
+    --color-custom-blue-100: oklch(92% 0.04 230);
+    --color-custom-blue-200: oklch(88% 0.06 230);
+    --color-custom-blue-300: oklch(85.35% 0.09 227);  /* ≈ #8ecae6 */
+    --color-custom-blue-400: oklch(77% 0.12 226);
+    --color-custom-blue-500: oklch(66.36% 0.14 225);  /* ≈ #219ebc */
+    --color-custom-blue-600: oklch(55% 0.13 225);
+    --color-custom-blue-700: oklch(45% 0.12 225);
+    --color-custom-blue-800: oklch(35% 0.10 225);
+    --color-custom-blue-900: oklch(25.76% 0.06 258);  /* ≈ #023047 */
+
 }
 
 @layer base {

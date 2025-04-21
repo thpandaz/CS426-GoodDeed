@@ -10,9 +10,9 @@ import {volunteerImage} from "@repo/assets"
 
 export default function Hero() {
   return (
-    <AnimatedGradient containerClassName="w-full py-44 md:py-48 lg:py-52">
+    <AnimatedGradient containerClassName="w-full py-44 md:py-48 lg:py-52 overflow-hidden">
       <section className="relative z-10">
-        <motion.div
+        {/* <motion.div
           className="absolute top-20 left-[10%] w-64 h-64 bg-primary-200 rounded-full opacity-30 blur-[80px]"
           animate={{
             scale: [1, 1.2, 1],
@@ -51,7 +51,7 @@ export default function Hero() {
             repeatType: "reverse",
             delay: 1,
           }}
-        />
+        /> */}
 
         {/* Removed lg:text-left so text stays centered on all screens */}
         <div className="container mx-auto px-4 md:px-6 -mt-18">
@@ -120,17 +120,7 @@ export default function Hero() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <motion.div
-                    animate={{
-                      y: [0, -15, 0],
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Number.POSITIVE_INFINITY,
-                      repeatType: "reverse",
-                      ease: "easeInOut",
-                    }}
-                  >
+                  
                     <img
                       src={volunteerImage}
                       alt="Volunteers helping in the community"
@@ -138,19 +128,7 @@ export default function Hero() {
                       height={400}
                       className="rounded-2xl object-cover shadow-3xl w-full h-full"
                     />
-                  </motion.div>
                 </motion.div>
-                <motion.div
-                    animate={{
-                      y: [0, -5, 0],
-                    }}
-                    transition={{
-                      duration: 5,
-                      repeat: Number.POSITIVE_INFINITY,
-                      repeatType: "reverse",
-                      ease: "easeInOut",
-                      delay: 1,
-                    }}>
                   <motion.div
                     className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg"
                     initial={{ opacity: 0, x: -20, y: 20 }}
@@ -174,20 +152,9 @@ export default function Hero() {
                       </div>
                     </div>
                     </motion.div>
-                </motion.div>
-                <motion.div
-                    animate={{
-                      y: [0, 10, 0],
-                    }}
-                    transition={{
-                      duration: 4.5,
-                      repeat: Number.POSITIVE_INFINITY,
-                      repeatType: "reverse",
-                      ease: "easeInOut",
-                      delay: 0.5,
-                    }}>
+                
                   <motion.div
-                    className="absolute -top-135 -right-6 bg-white p-4 rounded-xl shadow-lg"
+                    className="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-lg"
                     initial={{ opacity: 0, x: 20, y: -20 }}
                     animate={{ opacity: 1, x: 0, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
@@ -209,7 +176,6 @@ export default function Hero() {
                       </div>
                     </div>
                   </motion.div>
-                </motion.div>
               </div>
             </div>
           </div>
