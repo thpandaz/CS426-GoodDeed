@@ -1,11 +1,13 @@
 "use client"
 
-import { type ReactNode, useRef } from "react"
+import type React from "react"
+
+import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { cn } from "@ui/lib/utils"
 
 interface ScrollRevealProps {
-  children: ReactNode
+  children: React.ReactNode
   className?: string
   direction?: "up" | "down" | "left" | "right"
   delay?: number
@@ -40,7 +42,7 @@ export function ScrollReveal({
   }
 
   return (
-    <div ref={ref} className={cn("overflow-hidden", className)}>
+    <div ref={ref} className={cn("overflow-visible", className)}>
       <motion.div
         initial={initial}
         animate={isInView ? { opacity: 1, y: 0, x: 0 } : initial}

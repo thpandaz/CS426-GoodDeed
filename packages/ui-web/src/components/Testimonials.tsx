@@ -3,6 +3,7 @@
 import { Users } from "lucide-react"
 import { ScrollReveal } from "./ui/scroll-reveal"
 import { ParallaxSection } from "./ui/parallax-section"
+import { motion } from "framer-motion"
 
 export default function Testimonials() {
   const testimonials = [
@@ -10,7 +11,7 @@ export default function Testimonials() {
       name: "Alex Johnson",
       role: "Volunteer at City Food Bank",
       quote:
-        "VolunteerMatch helped me find a cause I'm passionate about. I've been volunteering at the food bank for 6 months now!",
+        "GoodDeed helped me find a cause I'm passionate about. I've been volunteering at the food bank for 6 months now!",
     },
     {
       name: "Priya Patel",
@@ -22,7 +23,7 @@ export default function Testimonials() {
       name: "Marcus Williams",
       role: "Volunteer Coordinator at Animal Shelter",
       quote:
-        "As an organization, we've found amazing volunteers through VolunteerMatch who truly care about our mission.",
+        "As an organization, we've found amazing volunteers through GoodDeed who truly care about our mission.",
     },
   ]
 
@@ -47,15 +48,25 @@ export default function Testimonials() {
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 md:grid-cols-3">
           {testimonials.map((testimonial, i) => (
             <ScrollReveal key={i} delay={i * 0.15} direction="up">
-              <div className="flex flex-col items-center space-y-4 rounded-xl bg-secondary-600 p-6 text-center hover:bg-secondary-700 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                <div className="h-16 w-16 rounded-full bg-accent-100 flex items-center justify-center">
-                  <Users className="h-8 w-8 text-accent-500" />
-                </div>
-                <p className="text-white/90">"{testimonial.quote}"</p>
-                <div>
-                  <h3 className="font-bold">{testimonial.name}</h3>
-                  <p className="text-sm text-white/80">{testimonial.role}</p>
-                </div>
+             <div className="p-2 scale-container">
+                <motion.div
+                  className="flex flex-col items-center space-y-4 rounded-xl bg-secondary-600 p-6 text-center scale-item"
+                  whileHover={{
+                    scale: 1.05,
+                    y: -10,
+                    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    transition: { duration: 0.2 },
+                  }}
+                >
+                  <div className="h-16 w-16 rounded-full bg-accent-100 flex items-center justify-center">
+                    <Users className="h-8 w-8 text-accent-500" />
+                  </div>
+                  <p className="text-white/90">"{testimonial.quote}"</p>
+                  <div>
+                    <h3 className="font-bold">{testimonial.name}</h3>
+                    <p className="text-sm text-white/80">{testimonial.role}</p>
+                  </div>
+                </motion.div>
               </div>
             </ScrollReveal>
           ))}

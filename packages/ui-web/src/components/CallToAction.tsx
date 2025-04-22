@@ -81,7 +81,7 @@ export default function CallToAction() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   size="lg"
-                  className="bg-white text-primary-500 hover:bg-accent-50 transition-all duration-300 hover:shadow-lg"
+                  className="bg-background text-primary-500 hover:bg-primary-600 transition-all duration-300 hover:text-background"
                 >
                   Sign Up Now
                 </Button>
@@ -89,8 +89,7 @@ export default function CallToAction() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-primary-600 transition-all duration-300"
+                  className="bg-background text-primary-500 hover:bg-primary-600 transition-all duration-300 hover:text-background"
                 >
                   Learn More
                 </Button>

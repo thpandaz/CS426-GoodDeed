@@ -28,7 +28,7 @@ export default function StickyFeatures() {
       label: "Community Impact",
       title: "Make a difference in countless ways from one platform.",
       description:
-        "VolunteerMatch is built for connecting passionate volunteers with meaningful opportunities. Find causes you care about, join community projects, and track your impact.",
+        "GoodDeed is built for connecting passionate volunteers with meaningful opportunities. Find causes you care about, join community projects, and track your impact.",
       stat: {
         value: "80%",
         text: "of volunteers find opportunities that align with their personal values and skills through our platform",
@@ -40,7 +40,7 @@ export default function StickyFeatures() {
       label: "Organization Management",
       title: "Manage volunteers and grow your impact faster.",
       description:
-        "Recruit dedicated volunteers, manage projects efficiently, and measure your organization's impact. VolunteerMatch brings every aspect of volunteer management together in one place.",
+        "Recruit dedicated volunteers, manage projects efficiently, and measure your organization's impact. GoodDeed brings every aspect of volunteer management together in one place.",
       stat: {
         value: "47%",
         text: "increase in volunteer retention for organizations using our platform",

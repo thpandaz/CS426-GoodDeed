@@ -1,11 +1,13 @@
 "use client"
 
-import { type ReactNode, useRef } from "react"
+import type React from "react"
+
+import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { cn } from "@ui/lib/utils"
 
 interface ParallaxSectionProps {
-  children: ReactNode
+  children: React.ReactNode
   className?: string
   direction?: "up" | "down"
   speed?: number
@@ -37,7 +39,7 @@ export function ParallaxSection({
   const scaleValue = useTransform(scrollYProgress, [0, 0.5], scaleRange)
 
   return (
-    <div ref={ref} className={cn("relative overflow-hidden", className)}>
+    <div ref={ref} className={cn("relative overflow-visible", className)}>
       <motion.div
         style={{
           y,
@@ -45,6 +47,7 @@ export function ParallaxSection({
           scale: scaleValue,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="overflow-fix overflow-visible"
       >
         {children}
       </motion.div>

@@ -23,7 +23,7 @@ export default function HowItWorks() {
   }
 
   return (
-    <ParallaxSection className="w-full py-12 md:py-24 lg:py-32 bg-accent-50" speed={0.1}>
+    <ParallaxSection className="w-full py-12 md:py-24 lg:py-32 bg-accent-50 relative z-10" speed={0.1}>
       <div className=" px-4 md:px-6">
         <ScrollReveal>
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -46,51 +46,57 @@ export default function HowItWorks() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <ScrollReveal delay={0.1} direction="up">
-            <motion.div
-              className="flex flex-col items-center space-y-4 text-center"
-              variants={item}
-              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-            >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-100 transition-transform duration-300 hover:scale-110">
-                <Search className="h-8 w-8 text-accent-500" />
-              </div>
-              <h3 className="text-xl font-bold text-secondary-500">Find Opportunities</h3>
-              <p className="text-secondary-600">
-                Search for volunteer opportunities that match your skills, interests, and availability.
-              </p>
-            </motion.div>
+            <div className="p-4 scale-container">
+              <motion.div
+                className="flex flex-col items-center space-y-4 text-center scale-item"
+                variants={item}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              >
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-100 transition-transform duration-300 hover:scale-110">
+                  <Search className="h-8 w-8 text-accent-500" />
+                </div>
+                <h3 className="text-xl font-bold text-secondary-500">Find Opportunities</h3>
+                <p className="text-secondary-600">
+                  Search for volunteer opportunities that match your skills, interests, and availability.
+                </p>
+              </motion.div>
+            </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2} direction="up">
-            <motion.div
-              className="flex flex-col items-center space-y-4 text-center"
-              variants={item}
-              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-            >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 transition-transform duration-300 hover:scale-110">
-                <Heart className="h-8 w-8 text-primary-500" />
-              </div>
-              <h3 className="text-xl font-bold text-secondary-500">Apply & Connect</h3>
-              <p className="text-secondary-600">
-                Reach out to organizations and apply for opportunities that inspire you.
-              </p>
-            </motion.div>
+            <div className="p-4 scale-container">
+              <motion.div
+                className="flex flex-col items-center space-y-4 text-center scale-item"
+                variants={item}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              >
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 transition-transform duration-300 hover:scale-110">
+                  <Heart className="h-8 w-8 text-primary-500" />
+                </div>
+                <h3 className="text-xl font-bold text-secondary-500">Apply & Connect</h3>
+                <p className="text-secondary-600">
+                  Reach out to organizations and apply for opportunities that inspire you.
+                </p>
+              </motion.div>
+            </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.3} direction="up">
-            <motion.div
-              className="flex flex-col items-center space-y-4 text-center"
-              variants={item}
-              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-            >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-highlight-100 transition-transform duration-300 hover:scale-110">
-                <Calendar className="h-8 w-8 text-highlight" />
-              </div>
-              <h3 className="text-xl font-bold text-secondary-500">Track Your Impact</h3>
-              <p className="text-secondary-600">
-                Log your volunteer hours and see the difference you're making in your community.
-              </p>
-            </motion.div>
+            <div className="p-4 scale-container">
+              <motion.div
+                className="flex flex-col items-center space-y-4 text-center scale-item"
+                variants={item}
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              >
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-highlight-100 transition-transform duration-300 hover:scale-110">
+                  <Calendar className="h-8 w-8 text-highlight" />
+                </div>
+                <h3 className="text-xl font-bold text-secondary-500">Track Your Impact</h3>
+                <p className="text-secondary-600">
+                  Log your volunteer hours and see the difference you're making in your community.
+                </p>
+              </motion.div>
+            </div>
           </ScrollReveal>
         </motion.div>
       </div>
