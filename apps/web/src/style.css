@@ -3,3 +3,32 @@
 @source "../node_modules/@repo/ui-web";
 
 @plugin "tailwindcss-animate";
+
+html,body{overflow-x:clip}
+.clip-ellipse {
+    clip-path: ellipse(60% 100% at 50% 100%);
+}
+
+@media screen and (min-width: 80rem) and (max-width: 1679px) {
+    .clip-ellipse {
+        clip-path: ellipse(65% 100% at 50% 100%);
+    }
+}
+
+@media screen and (min-width: 65rem) and (max-width: 1279px) {
+    .clip-ellipse {
+        clip-path: ellipse(70% 100% at 50% 100%);
+    }
+}
+
+@media screen and (min-width: 48rem) and (max-width: 1039px) {
+    .clip-ellipse {
+        clip-path: ellipse(75% 100% at 50% 100%);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .clip-ellipse {
+        clip-path: ellipse(80% 100% at 50% 100%);
+    }
+}
