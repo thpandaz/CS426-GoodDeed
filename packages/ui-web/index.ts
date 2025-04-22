@@ -1,3 +1,4 @@
+import "lucide-react"
 // utils
 
 // components
@@ -11,3 +12,5 @@ export { InfoCard } from "./src/components/InfoCard";
 export { LandingCard } from "./src/components/Landingcard";
 export { ReviewCarousel } from "./src/components/ReviewCarousel";
 
+// icons
+export * from "lucide-react";
