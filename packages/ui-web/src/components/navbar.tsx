@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@ui/components/ui/button";
@@ -10,16 +10,12 @@ export const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
@@ -30,12 +26,15 @@ export const NavBar = () => {
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-500 ease-in-out",
-        scrolled
+        isMenuOpen
+        ? "bg-white duration-0"
+        : scrolled
           ? "bg-background/95 backdrop-blur-md shadow-sm supports-[backdrop-filter]:bg-background/80"
-          : "bg-white"
+          : "bg-white",
       )}
     >
-      <div className=" grid grid-cols-3 items-center h-16 px-6 md:px-10 lg:px-12">
+      {/* <-- note grid-cols-2 here on mobile --> */}
+      <div className="grid grid-cols-2 md:grid-cols-3 items-center h-16 px-6 md:px-10 lg:px-12">
         {/* Left: Logo */}
         <div className="flex items-center">
           <Link
@@ -46,7 +45,7 @@ export const NavBar = () => {
           </Link>
         </div>
 
-        {/* Center: Desktop Navigation Links */}
+        {/* Center: Desktop nav (hidden on mobile) */}
         <div className="hidden md:flex justify-center">
           <nav className="flex items-center gap-1">
             {[
@@ -71,22 +70,23 @@ export const NavBar = () => {
           </nav>
         </div>
 
-        {/* Right: Actions (Sign In, Get Started, and Mobile Menu Button) */}
+        {/* Right: on mobile this is column #2 and will be full-width, pushing the button to the far right */}
         <div className="flex items-center justify-end gap-4">
+          {/* desktop-only links */}
           <Link
             to="/signin"
             className="hidden md:block text-sm font-medium text-secondary-600 transition-colors duration-500 ease-in-out hover:text-primary-500 px-3 py-2 rounded-md hover:bg-accent-50"
           >
             Sign In
           </Link>
-          <Button className="bg-primary-500/80 hover:bg-primary-500 text-white rounded-full px-6 transition-transform duration-500 ease-in-out hover:scale-105">
+          <Button className="hidden md:block bg-primary-500/80 hover:bg-primary-500 text-white rounded-full px-6 transition-transform duration-500 ease-in-out hover:scale-105">
             Get Started
           </Button>
 
-          {/* Mobile Menu Button */}
+          {/* mobile menu button */}
           <button
             className="md:hidden text-secondary-500 p-2 rounded-md hover:bg-accent-50 transition-colors duration-500 ease-in-out"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen((o) => !o)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
           >
@@ -95,7 +95,7 @@ export const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Nav Drawer */}
       <div
         className={cn(
           "fixed inset-0 top-14 z-50 bg-white transition-opacity duration-500 ease-in-out",

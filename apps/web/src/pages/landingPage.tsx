@@ -26,7 +26,6 @@ export default function LandingPage() {
             <HowItWorks />
             <Testimonials />
             <CallToAction />
-            
             <Footer />
         </div>
     );

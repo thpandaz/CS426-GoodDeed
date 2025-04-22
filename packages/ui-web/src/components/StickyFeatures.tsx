@@ -46,7 +46,7 @@ export default function StickyFeatures() {
         text: "increase in volunteer retention for organizations using our platform",
       },
       imageUrl: "https://placehold.co/400",
-      bgColor: "bg-accent-50",
+      bgColor: "bg-accent-100",
     },
     {
       icon: <Calendar className="h-5 w-5" />,
@@ -71,7 +71,7 @@ export default function StickyFeatures() {
         text: "of volunteers report learning new skills that benefit their personal and professional development",
       },
       imageUrl: "https://placehold.co/400",
-      bgColor: "bg-highlight-50",
+      bgColor: "bg-highlight-100",
     },
   ]
 
