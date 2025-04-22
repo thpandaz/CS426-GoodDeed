@@ -76,10 +76,10 @@ export default function StickyFeatures() {
   ]
 
   return (
-    <section className="relative bg-background pb-10" ref={containerRef}>
+    <section className="relative bg-custom-orange-50/50 pb-10" ref={containerRef}>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Left side - scrolling panels */}
-        <div className="relative z-10 max-w-md mx-auto lg:max-w-full lg:mx-0">
+        <div className="relative z-10 px-4 max-w-md mx-auto lg:max-w-full lg:mx-0">
           {features.map((feature, index) => (
             <FeaturePanel
               key={index}

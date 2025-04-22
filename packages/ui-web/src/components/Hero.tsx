@@ -23,7 +23,7 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
             >
               <motion.h1
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-secondary-500 font-heading"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-secondary-500 font-heading font-family-sans"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -34,7 +34,7 @@ export default function Hero() {
               </motion.h1>
 
               <motion.p
-                className="max-w-lg text-secondary-600 md:text-lg"
+                className="max-w-lg text-secondary-600 md:text-lg font-family-sans font-normal"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -53,17 +53,17 @@ export default function Hero() {
                   <Input
                     type="text"
                     placeholder="Search opportunities..."
-                    className="pl-10 pr-4 py-3 rounded-full border-accent-200 focus-visible:ring-highlight"
+                    className="pl-10 pr-4 py-3 rounded-full border-accent-200 focus-visible:ring-highlight font-family-sans"
                   />
                 </div>
 
-                <Button size="lg" className="bg-primary-500 hover:bg-primary-600 text-white rounded-full px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Button size="lg" className="bg-primary-500 hover:bg-primary-600 text-white rounded-full px-6 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg font-family-sans">
                   Search <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
               </motion.div>
 
               <motion.p
-                className="text-sm text-secondary-500"
+                className="text-sm text-secondary-500 font-family-sans"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
@@ -104,7 +104,7 @@ export default function Hero() {
                       <p className="text-sm font-medium text-secondary-500">
                         <AnimatedCounter value={10000} duration={1000} formatter={val => `${val.toLocaleString()}+`} />
                       </p>
-                      <p className="text-xs text-secondary-400">Organizations</p>
+                      <p className="text-xs text-secondary-400 font-family-sans">Organizations</p>
                     </div>
                   </div>
                 </motion.div>
@@ -124,7 +124,7 @@ export default function Hero() {
                       <p className="text-sm font-medium text-secondary-500">
                         <AnimatedCounter value={1000000} duration={1000} formatter={val => `${val / 1000000}M+`} />
                       </p>
-                      <p className="text-xs text-secondary-400">Hours Donated</p>
+                      <p className="text-xs text-secondary-400 font-family-sans">Hours Donated</p>
                     </div>
                   </div>
                 </motion.div>

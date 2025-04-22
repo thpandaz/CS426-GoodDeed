@@ -11,7 +11,7 @@ const DynamicEllipse = () => (
       className="absolute -top-[4rem] left-1/2 transform -translate-x-1/2 from-white from-50% to-transparent bg-gradient-to-b h-[12rem] w-full clip-ellipse"
     />
     <div
-      className="absolute -top-[4rem] left-1/2 transform -translate-x-1/2 from-orange-400 to-custom-orange-100 bg-gradient-to-b h-[12rem] w-full clip-ellipse"
+      className="absolute -top-[4rem] left-1/2 transform -translate-x-1/2 from-custom-orange-200 to-custom-orange-100 bg-gradient-to-b h-[12rem] w-full clip-ellipse"
     />
   </div>
 )
@@ -20,19 +20,21 @@ export default function LandingBody() {
   return (
     <section className="relative w-full -mt-10 pt-12 md:pt-8 lg:pt-16">
       <DynamicEllipse />
-      <div className=" w-full mt-18 md:mt-20 lg:mt-14 z-20 h-120 bg-linear-180 from-custom-orange-100 to-background">
+      <div className=" w-full mt-18 md:mt-20 lg:mt-14 z-20 h-120 bg-gradient-to-b from-custom-orange-100 to-custom-orange-50/50">
         <ScrollReveal>
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="flex flex-col items-center justify-center text-center">
             <div className="space-y-2">
-              <div className="mt-4 inline-block rounded-lg bg-teal-100 px-3 py-1 text-sm text-teal-700">
+              <div className="my-4 inline-block rounded-full bg-custom-blue-100 px-3 py-1 text-sm font-medium text-custom-blue-700">
                 Trusted by Leading Organizations
               </div>
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl font-heading">
-                Be the Change, One Click at a Time
-              </h2>
-              <p className="max-w-[700px] text-muted-foreground md:text-xl">
-                Thousands of nonprofits and community organizations use GoodDeed to find dedicated volunteers.
-              </p>
+              <div className="space-y-2">
+                <h2 className="text-4xl font-bold tracking-tighter md:text-5xl font-heading text-foreground">
+                  Be the Change, One Click at a Time
+                </h2>
+                <p className="max-w-[700px] text-muted-foreground md:text-xl text-foreground font-family-display ">
+                  Fuel Gen Z Volunteerism to Transform Communities and Shape a Brighter Future.
+                </p>
+              </div>
             </div>
           </div>
         </ScrollReveal>
