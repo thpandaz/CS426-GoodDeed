@@ -10,6 +10,7 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.29.0",
     "@repo/assets": "workspace:*",
     "@repo/design": "workspace:*",
     "@repo/ui-web": "workspace:*",
