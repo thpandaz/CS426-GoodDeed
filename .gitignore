@@ -11,5 +11,3 @@ server/dist
 public/dist
 
 *storybook.log
-
-packages/ui-web/components/ui

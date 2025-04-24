@@ -4,13 +4,14 @@ import NavBar from "@repo/ui-web/components/navbar";
 import ExplorePage from "./pages/explorePage";
 import LandingPage from "./pages/landingPage";
 import ErrorPage from "./pages/errorPage";
+import SidebarContent from "./pages/SidebarContent";
 
 function App() {
     return (
         <BrowserRouter>
             <NavBar />
             <div className="flex min-h-screen flex-col">
-                <Routes>
+                {/* <Routes>
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/explore" element={<ExplorePage />} />
                     <Route path="/students" element={<div>Students Page</div>} />
@@ -21,7 +22,8 @@ function App() {
                     <Route path="/error/:status" element={<ErrorPage />} />
                     <Route path="/error" element={<ErrorPage />} />
                     <Route path="*" element={<ErrorPage />} />                
-                </Routes>
+                </Routes> */}
+                <SidebarContent />
             </div>
         </BrowserRouter>
     );
