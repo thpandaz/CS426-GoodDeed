@@ -1,48 +1,59 @@
-# Use Bun's official Alpine image as the base
-FROM oven/bun:alpine AS base
+# 1) shared base with node + pnpm prepped
+FROM node:23-alpine AS base
+RUN apk add --no-cache libc6-compat \
+ && corepack enable \
+ && corepack prepare pnpm@latest --activate
 
-# Builder stage: Set up the pruned workspace for services_template
+# 2) builder: full install + turbo prune
 FROM base AS builder
-RUN apk update && apk add --no-cache libc6-compat
-WORKDIR /app
+WORKDIR /apps
 
-# Install Turbo using Bun so bunx can run it
-RUN bun add turbo
+# bring in the manifests
+COPY package.json pnpm-lock.yaml ./
 
-# Copy the entire repository into the container
+# install everything (includes tsconfig-paths if it's in dependencies)
+RUN pnpm install --frozen-lockfile
+
+# copy source & prune down to services_template
 COPY . .
+RUN pnpm dlx turbo prune services_template --docker
 
-# Generate a lockfile by installing dependencies (this creates bun.lockb)
-RUN bun install
-
-# Now run Turbo prune using bunx
-RUN bunx turbo prune app --docker
-
-# Installer stage: Install dependencies and build the project
+# 3) installer: install pruned dependencies & build
 FROM base AS installer
-RUN apk update && apk add --no-cache libc6-compat
-WORKDIR /app
+WORKDIR /apps
 
-# Copy the pruned JSON output (lockfiles and package.jsons)
-COPY --from=builder /app/out/json/ .
+# pruned package.json + lockfile only
+COPY --from=builder /apps/out/json/ ./
 
-# Install dependencies using Bun
-RUN bun install
+# install exactly those (fast, cache-efficient)
+RUN pnpm install --frozen-lockfile
 
-# Copy the full pruned workspace
-COPY --from=builder /app/out/full/ .
+# bring in your source and compiled deps
+COPY --from=builder /apps/out/full/ ./
 
-# Build the project using Turbo
-RUN bunx turbo build
+# build the actual service
+RUN pnpm turbo build
 
-# Runner stage: Set up a non-root user and run the built API
-FROM base AS runner
-WORKDIR /app
+# 4) runtime: just the compiled output
+FROM node:23-alpine AS runner
+WORKDIR /apps
 
-# Create a non-root user
-RUN addgroup --system --gid 1001 expressjs && \
-    adduser --system --uid 1001 expressjs
+# drop root privileges
+RUN addgroup --system --gid 1001 expressjs \
+ && adduser  --system --uid 1001 \
+              --ingroup expressjs \
+              --home /nonexistent \
+              expressjs
+
+RUN mkdir -p logs \
+ && chown expressjs:expressjs logs
+ 
 USER expressjs
 
-# Start the built API using Bun (adjust the path if needed)
-CMD bun app/services_template/dist/index.js
+# copy only built files & prod deps
+COPY --from=installer /apps ./
+
+VOLUME ["/apps/logs"]
+
+# run without tsconfig-paths preloading since alias paths are already rewritten
+CMD ["node", "apps/services_template/dist/index.js"]

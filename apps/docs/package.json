@@ -12,22 +12,26 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@repo/ui-web": "workspace:*"
+    "@repo/ui-web": "workspace:*",
+    "react": "18",
+    "react-dom": "18"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "eslint": "^8.57.0",
-    "typescript": "5.5.4",
-    "vite": "^5.1.4",
-    "storybook": "^8.6.11",
+    "@storybook/addon-essentials": "^8.6.11",
+    "@storybook/addon-interactions": "^8.6.11",
+    "@storybook/addon-onboarding": "^8.6.11",
+    "@storybook/blocks": "^8.6.11",
     "@storybook/react": "^8.6.11",
     "@storybook/react-vite": "^8.6.11",
-    "@storybook/addon-essentials": "^8.6.11",
-    "@storybook/blocks": "^8.6.11",
     "@storybook/test": "^8.6.11",
-    "@storybook/addon-onboarding": "^8.6.11",
-    "@chromatic-com/storybook": "^3",
-    "@storybook/addon-interactions": "^8.6.11"
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "eslint": "^8.57.0",
+    "storybook": "^8.6.11",
+    "typescript": "5.5.4",
+    "vite": "^5.1.4"
   }
 }

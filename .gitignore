@@ -2,6 +2,7 @@
 node_modules
 .turbo
 *.log
+logs/
 dist
 dist-ssr
 *.local
@@ -11,5 +12,3 @@ server/dist
 public/dist
 
 *storybook.log
-
-packages/ui-web/components/ui

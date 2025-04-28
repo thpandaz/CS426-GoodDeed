@@ -1,13 +1,12 @@
 services:
-  web:
-    container_name: webs
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-      target: runner
+  mongo:
+    image: mongo:6
+    container_name: mongo_template
     restart: always
     ports:
-      - "8000:8000"
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
     networks:
       - app_network
 
@@ -17,14 +16,23 @@ services:
       context: .
       dockerfile: ./apps/services_template/Dockerfile
     environment:
-      - PORT=3001
+      PORT: "3000"
+      MONGO_URI: "mongodb://mongo:27017"    # use the mongo service name
+      MONGO_DB_NAME: "user_db"
+    depends_on:
+      - mongo
     restart: always
     ports:
-      - "8001:3001"
+      - "3000:3000"                         # host:container
+    volumes:
+      - ./apps/services_template/logs:/apps/logs
     networks:
       - app_network
 
 networks:
   app_network:
     driver: bridge
-    external: true
+
+volumes:
+  mongo-data:
+    driver: local
