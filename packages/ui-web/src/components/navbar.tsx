@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@ui/components/ui/button";
 import { cn } from "../lib/utils";
 import { ColoredLogo } from "./ColoredLogo";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
 
 export const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,15 +74,17 @@ export const NavBar = () => {
         {/* Right: on mobile this is column #2 and will be full-width, pushing the button to the far right */}
         <div className="flex items-center justify-end gap-4">
           {/* desktop-only links */}
-          <Link
-            to="/signin"
-            className="hidden md:block text-sm font-medium text-secondary-600 transition-colors duration-500 ease-in-out hover:text-primary-500 px-3 py-2 rounded-md hover:bg-accent-50"
-          >
-            Sign In
-          </Link>
-          <Button className="hidden md:block bg-primary-500/80 hover:bg-primary-500 text-white rounded-full px-6 transition-transform duration-500 ease-in-out hover:scale-105">
-            Get Started
-          </Button>
+          <SignedOut>
+            <SignInButton mode="modal" className="hidden md:block text-sm font-medium text-secondary-600 transition-colors duration-500 ease-in-out hover:text-primary-500 px-3 py-2 rounded-md hover:bg-accent-50 cursor-pointer" />
+            <SignUpButton mode="modal">
+              <Button className="hidden md:block bg-primary-500/80 hover:bg-primary-500 text-white rounded-full px-6 transition-transform duration-500 ease-in-out hover:scale-105 cursor-pointer">
+              Get Started
+              </Button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
 
           {/* mobile menu button */}
           <button

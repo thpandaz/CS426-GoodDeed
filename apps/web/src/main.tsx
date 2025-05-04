@@ -6,6 +6,21 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import reportWebVitals from "./reportWebVitals";
 
 import "./style.css";
+import { ClerkProvider } from '@clerk/clerk-react'
+
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const CLERK_SIGN_IN_FALLBACK_REDIRECT_URL = import.meta.env.VITE_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL
+const CLERK_SIGN_UP_FALLBACK_REDIRECT_URL = import.meta.env.VITE_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+if (!CLERK_SIGN_IN_FALLBACK_REDIRECT_URL) {
+  throw new Error("Missing Sign In Fallback Redirect URL")
+}
+if (!CLERK_SIGN_UP_FALLBACK_REDIRECT_URL) {
+  throw new Error("Missing Sign Up Fallback Redirect URL")
+}
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY!
 const SIGN_IN_REDIRECT = import.meta.env.VITE_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL!
