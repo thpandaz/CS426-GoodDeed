@@ -28,15 +28,15 @@ const sanitizeBodyAndParams = (req: Request, _res: Response, next: NextFunction)
 };
 
 async function sendHeartbeat(): Promise<void> {
-  try {
-    await axios.post(`${env.REGISTRY_URL}/register`, {
-      name: env.SERVICE_NAME,
-      url: `http://${env.HOST}:${env.PORT}`,
-    });
-    logger.debug('💓 Heartbeat sent');
-  } catch (err: any) {
-    logger.error('💔 Heartbeat failed', { message: err.message });
-  }
+  // try {
+  //   await axios.post(`${env.REGISTRY_URL}/register`, {
+  //     name: env.SERVICE_NAME,
+  //     url: `http://${env.HOST}:${env.PORT}`,
+  //   });
+  //   logger.debug('💓 Heartbeat sent');
+  // } catch (err: any) {
+  //   logger.error('💔 Heartbeat failed', { message: err.message });
+  // }
 }
 
 function setupGracefulShutdown(server: ReturnType<typeof express.application.listen>): void {

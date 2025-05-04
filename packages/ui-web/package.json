@@ -17,15 +17,14 @@
   },
   "license": "MIT",
   "scripts": {
-    "lint": "eslint \"**/*.ts\"",
-    "dev": "tailwindcss -i ./src/css/styles.css -o ./dist/styles.css --watch",
-    "build": "tailwindcss -i ./src/css/styles.css -o ./dist/styles.css",
-    "type-check": "tsc --noEmit"
+    "lint": "eslint \"**/*.ts\""
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",
-    "@radix-ui/react-slot": "^1.1.2",
+    "@radix-ui/react-dropdown-menu": "^2.1.12",
+    "@radix-ui/react-label": "^2.1.4",
     "@radix-ui/react-separator": "^1.1.4",
+    "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.2.4",
     "@tailwindcss/cli": "^4.0.12",
     "autoprefixer": "^10.4.21",
@@ -44,10 +43,10 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@repo/hooks": "workspace:*",
     "@repo/assets": "workspace:*",
     "@repo/design": "workspace:*",
     "@repo/eslint-config": "workspace:*",
+    "@repo/hooks": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.0.8",
     "@turbo/gen": "^2.4.2",
