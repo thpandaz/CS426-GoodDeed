@@ -1,14 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import NavBar from "@repo/ui-web/components/navbar";
 import ExplorePage from "./pages/explorePage";
 import LandingPage from "./pages/landingPage";
 import ErrorPage from "./pages/errorPage";
-import SidebarContent from "./pages/SidebarContent";
 
 function App() {
     return (
-        <BrowserRouter>
+        <div>
             <NavBar />
             <div className="flex min-h-screen flex-col">
                 <Routes>
@@ -23,9 +22,8 @@ function App() {
                     <Route path="/error" element={<ErrorPage />} />
                     <Route path="*" element={<ErrorPage />} />                
                 </Routes>
-                <SidebarContent />
             </div>
-        </BrowserRouter>
+        </div>
     );
 }
 

@@ -10,13 +10,15 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.30.4",
     "@repo/assets": "workspace:*",
     "@repo/design": "workspace:*",
     "@repo/ui-web": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss-animate": "^1.0.7",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "web-vitals": "^4.2.4"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
