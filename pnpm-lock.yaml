@@ -222,8 +222,8 @@ importers:
   apps/web:
     dependencies:
       '@clerk/clerk-react':
-        specifier: ^5.29.0
-        version: 5.29.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^5.30.4
+        version: 5.30.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@repo/assets':
         specifier: workspace:*
         version: link:../../packages/assets
@@ -233,6 +233,9 @@ importers:
       '@repo/ui-web':
         specifier: workspace:*
         version: link:../../packages/ui-web
+      lucide-react:
+        specifier: ^0.475.0
+        version: 0.475.0(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -288,7 +291,7 @@ importers:
         version: link:../typescript-config
       '@types/bun':
         specifier: latest
-        version: 1.2.11
+        version: 1.2.12
 
   packages/auth: {}
 
@@ -303,7 +306,7 @@ importers:
         version: link:../typescript-config
       '@types/bun':
         specifier: latest
-        version: 1.2.11
+        version: 1.2.12
 
   packages/context:
     dependencies:
@@ -313,7 +316,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: latest
-        version: 1.2.11
+        version: 1.2.12
 
   packages/db:
     dependencies:
@@ -381,7 +384,7 @@ importers:
         version: 4.1.4
       '@types/bun':
         specifier: latest
-        version: 1.2.11
+        version: 1.2.12
       tailwindcss:
         specifier: ^4.0.14
         version: 4.1.4
@@ -638,9 +641,6 @@ importers:
         specifier: ^3.24.2
         version: 3.24.3
     devDependencies:
-      '@clerk/clerk-react':
-        specifier: ^5.29.0
-        version: 5.29.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@repo/assets':
         specifier: workspace:*
         version: link:../assets
@@ -933,15 +933,15 @@ packages:
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
-  '@clerk/clerk-react@5.29.0':
-    resolution: {integrity: sha512-S8wenyl5R/8YmUT1tElQZdmHe/MASM9JDJRKqhy0kVYXdKzjhuwTBgT+m3hXl3zdq/Gwi3hgv7pRnQWpQisutQ==}
+  '@clerk/clerk-react@5.30.4':
+    resolution: {integrity: sha512-tppWAMc41YcA+sESAEYfXnhWYkTL7Bd354A9FUd621BC2wiRag0nQWGu1c3e6rm0kJiBSWwyGnHt/67irYexrg==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0 || ^19.0.0-0
       react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-0
 
-  '@clerk/shared@3.7.3':
-    resolution: {integrity: sha512-IMpz1bgZZzlxNLyFliE0GrA3NT1Wgidl2CBORkE2S/YUSCH4ge8EPg5tfQq9Ja6d17TfarkzEafrm1b/BHxSWg==}
+  '@clerk/shared@3.7.8':
+    resolution: {integrity: sha512-+cjMDYORJ73pHp1vsn/6jaMPjSVeU01oXyHTTm3e3pm0C7YShMxEklVkZYg8uVEhAfNKSqdqwo3EKR4tuLEabw==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0 || ^19.0.0-0
@@ -952,9 +952,13 @@ packages:
       react-dom:
         optional: true
 
-  '@clerk/types@4.55.0':
-    resolution: {integrity: sha512-MJc/zo9vJOq1mY37RbRjrZ883AKe9gitlYFyVB3R+ChKm0uBl2Mm8R2gkYy1GGKYvqBm27GJooWHxdcM1Yv1eQ==}
+  '@clerk/types@4.56.3':
+    resolution: {integrity: sha512-DZ3Ge/SQClMqDw0kR1IZKN/xKpvLAIxYcj/TtswXK4rZK+CrlljHvRkViUMXNV0CAYHKVOSPdWnIyRE8OedPpA==}
     engines: {node: '>=18.17.0'}
+
+  '@colors/colors@1.6.0':
+    resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
+    engines: {node: '>=0.1.90'}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -2439,8 +2443,8 @@ packages:
   '@types/body-parser@1.19.5':
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
 
-  '@types/bun@1.2.11':
-    resolution: {integrity: sha512-ZLbbI91EmmGwlWTRWuV6J19IUiUC5YQ3TCEuSHI3usIP75kuoA8/0PVF+LTrbEnVc8JIhpElWOxv1ocI1fJBbw==}
+  '@types/bun@1.2.12':
+    resolution: {integrity: sha512-lY/GQTXDGsolT/TiH72p1tuyUORuRrdV7VwOTOjDOt8uTBJQOJc5zz3ufwwDl0VBaoxotSk4LdP0hhjLJ6ypIQ==}
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
@@ -2877,8 +2881,8 @@ packages:
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
 
-  bun-types@1.2.11:
-    resolution: {integrity: sha512-dbkp5Lo8HDrXkLrONm6bk+yiiYQSntvFUzQp0v3pzTAsXk6FtgVMjdQ+lzFNVAmQFUkPQZ3WMZqH5tTo+Dp/IA==}
+  bun-types@1.2.12:
+    resolution: {integrity: sha512-tvWMx5vPqbRXgE8WUZI94iS1xAYs8bkqESR9cxBB1Wi+urvfTrF1uzuDgBHFAdO0+d2lmsbG3HmeKMvUyj6pWA==}
 
   bundle-require@5.1.0:
     resolution: {integrity: sha512-3WrrOuZiyaaZPWiEt4G3+IffISVC9HYlWueJEBWED4ZH4aIAC2PnkdnuRrR94M+w6yGWn4AglWtJtBI8YqvgoA==}
@@ -3587,8 +3591,8 @@ packages:
     resolution: {integrity: sha512-hGfm/slu0ZabnNt4oaRZ6uREyfCj6P4fT/n6A1rGV+Z0VdGXjfOhVUpkn6qVQONHGIFwmveGXyDs75+nr6FM8w==}
     engines: {node: '>= 6'}
 
-  formidable@2.1.3:
-    resolution: {integrity: sha512-vDI5JjeALeGXpyL8v71ZG2VgHY5zD6qg1IvypU7aJCYvREZyhawrYJxMdsWO+m5DIGLiMiDH71yEN8RO4wQAMQ==}
+  formidable@2.1.4:
+    resolution: {integrity: sha512-wtSmhQSwevqVtqnwCctBsn45gEbLyZknwW6Q+p76GI0Gi+V35X6dDw0+Z5dCnjQ0uYIv2PmXXj+QQU++JR4EBQ==}
     deprecated: 'ATTENTION: please upgrade to v3! The v1 and v2 versions are pretty old and deprecated'
 
   forwarded@0.2.0:
@@ -4114,6 +4118,10 @@ packages:
   jiti@2.4.2:
     resolution: {integrity: sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==}
     hasBin: true
+
+  joycon@3.1.1:
+    resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
+    engines: {node: '>=10'}
 
   js-cookie@3.0.5:
     resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
@@ -6170,25 +6178,25 @@ snapshots:
       - '@chromatic-com/playwright'
       - react
 
-  '@clerk/clerk-react@5.29.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/clerk-react@5.30.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@clerk/shared': 3.7.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@clerk/types': 4.55.0
+      '@clerk/shared': 3.7.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@clerk/types': 4.56.3
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tslib: 2.8.1
 
-  '@clerk/clerk-react@5.29.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@clerk/clerk-react@5.30.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@clerk/shared': 3.7.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@clerk/types': 4.55.0
+      '@clerk/shared': 3.7.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@clerk/types': 4.56.3
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       tslib: 2.8.1
 
-  '@clerk/shared@3.7.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/shared@3.7.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@clerk/types': 4.55.0
+      '@clerk/types': 4.56.3
       dequal: 2.0.3
       glob-to-regexp: 0.4.1
       js-cookie: 3.0.5
@@ -6198,9 +6206,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@clerk/shared@3.7.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@clerk/shared@3.7.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@clerk/types': 4.55.0
+      '@clerk/types': 4.56.3
       dequal: 2.0.3
       glob-to-regexp: 0.4.1
       js-cookie: 3.0.5
@@ -6210,9 +6218,11 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@clerk/types@4.55.0':
+  '@clerk/types@4.56.3':
     dependencies:
       csstype: 3.1.3
+
+  '@colors/colors@1.6.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -6736,11 +6746,11 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@mdx-js/react@3.1.0(@types/react@19.1.2)(react@18.3.1)':
+  '@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0)':
     dependencies:
       '@types/mdx': 2.0.13
       '@types/react': 19.1.2
-      react: 18.3.1
+      react: 19.1.0
 
   '@mongodb-js/saslprep@1.2.2':
     dependencies:
@@ -7239,12 +7249,12 @@ snapshots:
 
   '@storybook/addon-docs@8.6.12(@types/react@19.1.2)(storybook@8.6.12(prettier@3.5.3))':
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@19.1.2)(react@18.3.1)
-      '@storybook/blocks': 8.6.12(react-dom@19.1.0(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))
+      '@mdx-js/react': 3.1.0(@types/react@19.1.2)(react@19.1.0)
+      '@storybook/blocks': 8.6.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3))
       '@storybook/csf-plugin': 8.6.12(storybook@8.6.12(prettier@3.5.3))
-      '@storybook/react-dom-shim': 8.6.12(react-dom@19.1.0(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))
-      react: 18.3.1
-      react-dom: 19.1.0(react@18.3.1)
+      '@storybook/react-dom-shim': 8.6.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3))
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
       storybook: 8.6.12(prettier@3.5.3)
       ts-dedent: 2.2.0
     transitivePeerDependencies:
@@ -7314,14 +7324,14 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/blocks@8.6.12(react-dom@19.1.0(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))':
+  '@storybook/blocks@8.6.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3))':
     dependencies:
-      '@storybook/icons': 1.4.0(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
+      '@storybook/icons': 1.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       storybook: 8.6.12(prettier@3.5.3)
       ts-dedent: 2.2.0
     optionalDependencies:
-      react: 18.3.1
-      react-dom: 19.1.0(react@18.3.1)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   '@storybook/builder-vite@8.6.12(storybook@8.6.12(prettier@3.5.3))(vite@5.4.18(@types/node@20.17.30)(lightningcss@1.29.2))':
     dependencies:
@@ -7368,10 +7378,10 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/icons@1.4.0(react-dom@19.1.0(react@18.3.1))(react@18.3.1)':
+  '@storybook/icons@1.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      react: 18.3.1
-      react-dom: 19.1.0(react@18.3.1)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   '@storybook/instrumenter@8.6.12(storybook@8.6.12(prettier@3.5.3))':
     dependencies:
@@ -7393,10 +7403,10 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.6.12(prettier@3.5.3)
 
-  '@storybook/react-dom-shim@8.6.12(react-dom@19.1.0(react@18.3.1))(react@18.3.1)(storybook@8.6.12(prettier@3.5.3))':
+  '@storybook/react-dom-shim@8.6.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3))':
     dependencies:
-      react: 18.3.1
-      react-dom: 19.1.0(react@18.3.1)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
       storybook: 8.6.12(prettier@3.5.3)
 
   '@storybook/react-vite@8.6.12(@storybook/test@8.6.12(storybook@8.6.12(prettier@3.5.3)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.40.0)(storybook@8.6.12(prettier@3.5.3))(typescript@5.5.4)(vite@5.4.18(@types/node@20.17.30)(lightningcss@1.29.2))':
@@ -7641,9 +7651,9 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/node': 20.17.30
 
-  '@types/bun@1.2.11':
+  '@types/bun@1.2.12':
     dependencies:
-      bun-types: 1.2.11
+      bun-types: 1.2.12
 
   '@types/connect@3.4.38':
     dependencies:
@@ -8181,7 +8191,7 @@ snapshots:
       base64-js: 1.5.1
       ieee754: 1.2.1
 
-  bun-types@1.2.11:
+  bun-types@1.2.12:
     dependencies:
       '@types/node': 20.17.30
 
@@ -9841,6 +9851,8 @@ snapshots:
 
   jiti@2.4.2: {}
 
+  joycon@3.1.1: {}
+
   js-cookie@3.0.5: {}
 
   js-tokens@4.0.0: {}
@@ -10003,6 +10015,10 @@ snapshots:
       yallist: 3.1.1
 
   lru-cache@7.18.3: {}
+
+  lucide-react@0.475.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   lucide-react@0.475.0(react@19.1.0):
     dependencies:
@@ -10562,11 +10578,6 @@ snapshots:
       react: 19.1.0
       scheduler: 0.23.2
     optional: true
-
-  react-dom@19.1.0(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-      scheduler: 0.26.0
 
   react-dom@19.1.0(react@19.1.0):
     dependencies:

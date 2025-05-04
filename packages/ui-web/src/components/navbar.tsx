@@ -50,8 +50,8 @@ export const NavBar = () => {
         <div className="hidden md:flex justify-center">
           <nav className="flex items-center gap-1">
             {[
-              { name: "Explore", path: "/explore" },
-              { name: "Employers", path: "/employers" },
+              { name: "Students", path: "/students" },
+              { name: "Organization", path: "/organization" },
               { name: "Universities", path: "/universities" },
               { name: "About", path: "/about" },
             ].map((item) => (
@@ -110,7 +110,7 @@ export const NavBar = () => {
         <nav className="flex flex-col p-6 space-y-4">
           {[
             { name: "Students", path: "/students" },
-            { name: "Employers", path: "/employers" },
+            { name: "Organization", path: "/organization" },
             { name: "Universities", path: "/universities" },
             { name: "About", path: "/about" },
             { name: "Sign In", path: "/signin" },
