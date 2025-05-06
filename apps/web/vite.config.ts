@@ -21,5 +21,6 @@ export default defineConfig({
   server: {
     port: 8000,
     fs: { allow: [process.cwd(), path.resolve(process.cwd(), 'packages')] },
+    allowedHosts: ['all', '0cda-128-119-202-12.ngrok-free.app'],
   },
 });

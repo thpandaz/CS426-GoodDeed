@@ -1,179 +1,176 @@
-import type * as React from "react"
+"use client"
 
-import { SearchForm } from "./search-form"
-import { VersionSwitcher } from "./version-switcher"
+import React from "react"
+import { Link, useLocation } from "react-router-dom"
+import {
+  Home,
+  Search,
+  User as UserIcon,
+  Calendar,
+  Briefcase,
+  MessageSquare,
+  Bell,
+  Settings,
+  Heart,
+  Users,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  useSidebar,
 } from "@ui/components/ui/sidebar"
+import { Avatar, AvatarImage, AvatarFallback } from "@ui/components/ui/avatar"
+import { Badge } from "@ui/components/ui/badge"
+import { getIntials } from "@repo/utils/render"
+import { useUser } from "@clerk/clerk-react"
 
-// This is sample data.
-const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Building Your Application",
-      url: "#",
-      items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
-        {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-  ],
-}
+// Primary navigation items
+const navigationItems = [
+  { name: "Dashboard",     href: "/dashboard",     icon: Home       },
+  { name: "Explore",       href: "/explore",       icon: Search     },
+  { name: "Profile",       href: "/profile",       icon: UserIcon   },
+  { name: "Events",        href: "/events",        icon: Calendar,  badge: "3" },
+  { name: "Opportunities", href: "/opportunities", icon: Briefcase  },
+  { name: "Messages",      href: "/messages",      icon: MessageSquare, badge: "5" },
+  { name: "Notifications", href: "/notifications", icon: Bell,      badge: "12" },
+  { name: "Communities",   href: "/communities",   icon: Users      },
+  { name: "Impact",        href: "/impact",        icon: Heart      },
+]
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+// Secondary navigation items
+const secondaryNavItems = [
+  { name: "Settings", href: "/settings", icon: Settings },
+]
+
+export default function AppSidebar(
+  props: React.ComponentProps<typeof Sidebar>
+) {
+  const { pathname } = useLocation()
+  const { user } = useUser()
+  const { state } = useSidebar()
+  const isCollapsed = state === "collapsed"
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher versions={data.versions} defaultVersion={data.versions[0]} />
-        <SearchForm />
+        {/* Logo & Collapse */}
+        <div className="flex items-center h-16 px-4">
+          <Link to="/dashboard" className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white font-bold">
+              GD
+            </div>
+            {!isCollapsed && (
+              <span className="font-bold text-lg text-secondary-800">
+                GoodDeed
+              </span>
+            )}
+          </Link>
+          <CollapseButton />
+        </div>
+
+        {/* Clerk-powered User Profile */}
+        {user && (
+          <div className="flex items-center gap-3 p-4 border-t border-sidebar-border">
+            <Avatar className="h-10 w-10">
+              <AvatarImage
+                src={user.imageUrl ?? `https://placehold.co/400?text=${getIntials(user.fullName ? user.fullName : "")}`}
+                alt={user.fullName ?? "User"}
+              />
+              <AvatarFallback>
+                {user.fullName?.charAt(0) ?? "U"}
+              </AvatarFallback>
+            </Avatar>
+
+            {!isCollapsed && (
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-sidebar-foreground truncate">
+                  {user.fullName}
+                </p>
+                <p className="text-xs text-sidebar-foreground/70 truncate">
+                  {user.primaryEmailAddress?.emailAddress}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </SidebarHeader>
+
+      {/* Main Navigation */}
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
+        <SidebarMenu>
+          {navigationItems.map((item) => (
+            <SidebarMenuItem key={item.name}>
+              <SidebarMenuButton
+                asChild
+                isActive={pathname === item.href}
+                tooltip={item.name}
+              >
+                <Link to={item.href} className="flex items-center gap-2">
+                  <item.icon className="h-5 w-5" />
+                  {!isCollapsed && <span>{item.name}</span>}
+                  {item.badge && (
+                    <Badge className="ml-auto bg-primary-500 text-white">
+                      {item.badge}
+                    </Badge>
+                  )}
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
       </SidebarContent>
+
+      {/* Secondary Navigation */}
+      <SidebarFooter>
+        <SidebarMenu>
+          {secondaryNavItems.map((item) => (
+            <SidebarMenuItem key={item.name}>
+              <SidebarMenuButton
+                asChild
+                isActive={pathname === item.href}
+                tooltip={item.name}
+              >
+                <Link to={item.href} className="flex items-center gap-2">
+                  <item.icon className="h-5 w-5" />
+                  {!isCollapsed && <span>{item.name}</span>}
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarFooter>
+
+      {/* Rail / Collapsed View */}
       <SidebarRail />
     </Sidebar>
   )
 }
+
+function CollapseButton() {
+  const { state, toggleSidebar } = useSidebar()
+
+  return (
+    <button
+      onClick={toggleSidebar}
+      aria-label={
+        state === "expanded" ? "Collapse sidebar" : "Expand sidebar"
+      }
+      className="ml-auto p-2 rounded-md text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+    >
+      {state === "expanded" ? (
+        <ChevronLeft className="h-4 w-4" />
+      ) : (
+        <ChevronRight className="h-4 w-4" />
+      )}
+    </button>
+  )
+}
+

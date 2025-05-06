@@ -1,9 +1,8 @@
 // components/DashboardLayout.tsx
-import { ReactNode } from "react"
 import { Outlet, useLocation, Link } from "react-router-dom"
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react"
 
-import { AppSidebar } from "@repo/ui-web/components/app-sidebar"
+import AppSidebar  from "@repo/ui-web/components/app-sidebar"
 import {
   SidebarProvider,
   SidebarInset,
