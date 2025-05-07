@@ -1,7 +1,7 @@
 # Test script for organization endpoints
 
 # Base URL
-$baseUrl = "http://localhost:8000/organization-service/v1/organizations"
+$baseUrl = "http://localhost:3000/organization-service/v1/organizations"
 $headers = @{
     "Content-Type" = "application/json"
 }
@@ -23,7 +23,8 @@ function Invoke-ApiRequest {
         }
         Write-Host "Success: $TestName"
         return $response
-    } catch {
+    }
+    catch {
         Write-Host "Failed: $TestName"
         Write-Host "Error: $($_.Exception.Message)"
         return $null
@@ -39,26 +40,26 @@ Write-Host "Starting Organization Service Tests"
 
 # 1. Register Valid Organization
 $registerBody = @{
-    uuid = "org_$timestamp"
-    clerkId = $uniqueClerkId
-    name = "Good Deeds Foundation"
-    email = $uniqueEmail
-    location = @{
-        city = "New York"
-        country = "USA"
-        state = "NY"
+    uuid       = "org_$timestamp"
+    clerkId    = $uniqueClerkId
+    name       = "Good Deeds Foundation"
+    email      = $uniqueEmail
+    location   = @{
+        city       = "New York"
+        country    = "USA"
+        state      = "NY"
         cordinates = @{
-            lat = 40.7128
+            lat  = 40.7128
             long = -74.0060
         }
     }
-    phone = "+1-555-123-4567"
-    industry = "Non-profit"
+    phone      = "+1-555-123-4567"
+    industry   = "Non-profit"
     reputation = @{
-        score = 5
+        score             = 5
         amount_of_reviews = 1
     }
-    events = @()
+    events     = @()
 } | ConvertTo-Json -Depth 10
 
 $org = Invoke-ApiRequest -Uri "$baseUrl/register" -Method "POST" -Body $registerBody -TestName "Register Organization"
@@ -75,7 +76,7 @@ $orgByClerkId = Invoke-ApiRequest -Uri "$baseUrl/clerk/$uniqueClerkId" -Method "
 
 # Test update
 $updateBody = @{
-    name = "Updated Good Deeds Foundation"
+    name  = "Updated Good Deeds Foundation"
     phone = "+1-555-987-6543"
 } | ConvertTo-Json
 
