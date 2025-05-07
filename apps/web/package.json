@@ -14,6 +14,7 @@
     "@repo/assets": "workspace:*",
     "@repo/design": "workspace:*",
     "@repo/ui-web": "workspace:*",
+    "@repo/utils": "workspace:*",
     "lucide-react": "^0.475.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -29,5 +29,6 @@ export const getUserParamsSchema = z.object({
     userId: z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid user ID"),
   });
 
+
 export type CreateUserInput = z.infer<typeof createUserSchema>["body"];
 export type UpdateUserInput = z.infer<typeof updateUserSchema>;

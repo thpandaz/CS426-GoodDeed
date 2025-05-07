@@ -40,20 +40,47 @@ async function sendHeartbeat(): Promise<void> {
 }
 
 function setupGracefulShutdown(server: ReturnType<typeof express.application.listen>): void {
-  const shutdown = (): void => {
+  let isShuttingDown = false;
+
+  const cleanup = async () => {
+    if (isShuttingDown) return;
+    isShuttingDown = true;
+
     logger.info('⚡️ Shutdown signal received');
+    
+    // Close server first
     server.close(() => {
-      logger.info('✅ Server closed');
-      process.exit(0);
+      logger.info('✅ HTTP server closed');
+      
+      // Then close DB connection
+      try {
+        // Add your DB disconnect logic here if needed
+        logger.info('✅ Database connections closed');
+        process.exit(0);
+      } catch (err) {
+        logger.error('❌ Error during cleanup', err);
+        process.exit(1);
+      }
     });
+
+    // Force shutdown after timeout
     setTimeout(() => {
-      logger.error('❗️ Forced exit');
+      logger.error('❗️ Forced shutdown after timeout');
       process.exit(1);
-    }, 10_000).unref();
+    }, 5000).unref();
   };
 
-  process.on('SIGINT', shutdown);
-  process.on('SIGTERM', shutdown);
+  // Handle different shutdown signals
+  process.on('SIGTERM', cleanup);
+  process.on('SIGINT', cleanup);
+  process.on('uncaughtException', (err) => {
+    logger.error('❌ Uncaught exception', err);
+    cleanup();
+  });
+  process.on('unhandledRejection', (reason) => {
+    logger.error('❌ Unhandled rejection', reason);
+    cleanup();
+  });
 }
 
 async function start(): Promise<void> {
@@ -91,7 +118,7 @@ async function start(): Promise<void> {
       logger.info(`Server (${NODE_ENV}) running at http://${HOST}:${port}`);
     });
 
-    // Graceful Shutdown
+    // Setup Graceful Shutdown
     setupGracefulShutdown(server);
 
     // Heartbeat to Registry
@@ -102,5 +129,8 @@ async function start(): Promise<void> {
     process.exit(1);
   }
 }
-console.log('Starting service...');
-start();
+
+start().catch((err) => {
+  console.error('Fatal error during startup:', err);
+  process.exit(1);
+});

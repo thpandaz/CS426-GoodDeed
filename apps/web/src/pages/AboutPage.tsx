@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom'
 import { Phong, Cameron, Grabiel, Logo } from '@repo/assets'
 import { Button } from '@repo/ui-web/components/ui/button'
+import { getIntials } from '@repo/utils/render'
 
 const team = [
   { name: 'Jacob Beaumont', role: 'Co-Founder', image: '' },
@@ -74,10 +75,7 @@ export default function AboutPage() {
           <h3 className="text-xl font-medium text-secondary-700 mb-4 text-center">Our Team</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             {team.map((member, i) => {
-              const initials = member.name
-                .split(' ')
-                .map((n) => n[0])
-                .join('')
+              const initials = getIntials(member.name)
               const src = `https://placehold.co/80?text=${initials}`
 
               return (

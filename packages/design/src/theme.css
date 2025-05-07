@@ -133,7 +133,13 @@
     --breakpoint-xs: '25rem';
     --breakpoint-2sm: '30rem';
 
-
+    /* Add sidebar-specific theme variables */
+    --sidebar-bg: oklch(99% 0.01 195.61);
+    --sidebar-border: oklch(85% 0.03 196);
+    --sidebar-accent: oklch(70% 0.06 196);
+    --sidebar-accent-foreground: oklch(25% 0.05 196);
+    --sidebar-item-hover: oklch(97% 0.02 196);
+    --sidebar-highlight: var(--color-primary-500);
 }
 
 @layer base {
