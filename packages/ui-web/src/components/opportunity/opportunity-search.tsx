@@ -6,13 +6,29 @@ import { useState, useEffect } from "react"
 import { Input } from "@ui/components/ui/input"
 import { Button } from "@ui/components/ui/button"
 import { Search, X } from "lucide-react"
+import { Skeleton } from "@ui/components/ui/skeleton"
 
 interface OpportunitySearchProps {
   defaultValue: string
+  isLoading?: boolean
   onSearch: (value: string) => void
 }
 
-export default function OpportunitySearch({ defaultValue, onSearch }: OpportunitySearchProps) {
+export function OpportunitySearchSkeleton() {
+  return (
+    <div className="w-full lg:max-w-xl">
+      <div className="relative">
+        <Skeleton className="h-10 w-full rounded-md" />
+      </div>
+    </div>
+  )
+}
+
+export default function OpportunitySearch({ 
+  defaultValue, 
+  isLoading = false, 
+  onSearch 
+}: OpportunitySearchProps) {
   const [searchTerm, setSearchTerm] = useState(defaultValue)
 
   // Update search term when defaultValue changes
@@ -28,6 +44,10 @@ export default function OpportunitySearch({ defaultValue, onSearch }: Opportunit
   const clearSearch = () => {
     setSearchTerm("")
     onSearch("")
+  }
+
+  if (isLoading) {
+    return <OpportunitySearchSkeleton />
   }
 
   return (
@@ -53,6 +73,7 @@ export default function OpportunitySearch({ defaultValue, onSearch }: Opportunit
         <Button
           type="submit"
           className="absolute right-0 top-0 h-full rounded-l-none bg-primary-500 hover:bg-primary-600"
+          disabled={isLoading}
         >
           Search
         </Button>

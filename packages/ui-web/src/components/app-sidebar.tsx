@@ -25,6 +25,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarSeparator,
   useSidebar,
 } from "@ui/components/ui/sidebar"
 import { Avatar, AvatarImage, AvatarFallback } from "@ui/components/ui/avatar"
@@ -35,13 +36,13 @@ import { useUser } from "@clerk/clerk-react"
 // Primary navigation items
 const navigationItems = [
   { name: "Dashboard",     href: "/dashboard",     icon: Home       },
-  { name: "Explore",       href: "/explore",       icon: Search     },
+  // { name: "Explore",       href: "/explore",       icon: Search     },
   { name: "Profile",       href: "/profile",       icon: UserIcon   },
-  { name: "Events",        href: "/events",        icon: Calendar,  badge: "3" },
+  { name: "Events",        href: "/events",        icon: Calendar },
   { name: "Opportunities", href: "/opportunities", icon: Briefcase  },
-  { name: "Messages",      href: "/messages",      icon: MessageSquare, badge: "5" },
-  { name: "Notifications", href: "/notifications", icon: Bell,      badge: "12" },
-  { name: "Communities",   href: "/communities",   icon: Users      },
+  // { name: "Messages",      href: "/messages",      icon: MessageSquare},
+  // { name: "Notifications", href: "/notifications", icon: Bell  },
+  // { name: "Communities",   href: "/communities",   icon: Users      },
   { name: "Impact",        href: "/impact",        icon: Heart      },
 ]
 
@@ -59,16 +60,19 @@ export default function AppSidebar(
   const isCollapsed = state === "collapsed"
 
   return (
-    <Sidebar {...props}>
-      <SidebarHeader>
+    <Sidebar 
+      className="shadow-sm border-r border-sidebar-border/10 bg-sidebar/95 font-sans" 
+      {...props}
+    >
+      <SidebarHeader className="py-4 px-3">
         {/* Logo & Collapse */}
-        <div className="flex items-center h-16 px-4">
-          <Link to="/dashboard" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-primary-500 flex items-center justify-center text-white font-bold">
+        <div className="flex items-center h-14 px-2 mb-4">
+          <Link to="/dashboard" className="flex items-center gap-3.5 group">
+            <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold shadow-sm group-hover:shadow-md transition-all duration-300">
               GD
             </div>
             {!isCollapsed && (
-              <span className="font-bold text-lg text-secondary-800">
+              <span className="font-bold text-lg bg-gradient-to-r from-secondary-600 to-secondary-800 text-transparent bg-clip-text tracking-tight">
                 GoodDeed
               </span>
             )}
@@ -76,48 +80,57 @@ export default function AppSidebar(
           <CollapseButton />
         </div>
 
-        {/* Clerk-powered User Profile */}
-        {user && (
-          <div className="flex items-center gap-3 p-4 border-t border-sidebar-border">
-            <Avatar className="h-10 w-10">
-              <AvatarImage
-                src={user.imageUrl ?? `https://placehold.co/400?text=${getIntials(user.fullName ? user.fullName : "")}`}
-                alt={user.fullName ?? "User"}
-              />
-              <AvatarFallback>
-                {user.fullName?.charAt(0) ?? "U"}
+        {/* User Profile */}
+        <div className={`px-2 py-3 mb-1 rounded-lg bg-sidebar-accent/5 ${isCollapsed ? "flex justify-center" : ""}`}>
+          <Link to="/profile" className={`flex items-center gap-3 ${isCollapsed ? "" : "px-1"}`}>
+            <Avatar className="h-10 w-10 border-2 border-sidebar-accent/10 shadow-sm">
+              <AvatarImage src={user?.imageUrl} alt={user?.fullName || "User"} />
+              <AvatarFallback className="bg-primary-50 text-primary-700">
+                {getIntials(user?.fullName || "User")}
               </AvatarFallback>
             </Avatar>
-
             {!isCollapsed && (
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-sidebar-foreground truncate">
-                  {user.fullName}
-                </p>
-                <p className="text-xs text-sidebar-foreground/70 truncate">
-                  {user.primaryEmailAddress?.emailAddress}
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium text-sidebar-foreground truncate leading-tight">
+                  {user?.fullName || "User"}
+                </div>
+                <p className="text-xs text-sidebar-foreground/60 truncate mt-0.5">
+                  {user?.primaryEmailAddress?.emailAddress || "user@example.com"}
                 </p>
               </div>
             )}
-          </div>
-        )}
+          </Link>
+        </div>
       </SidebarHeader>
 
-      {/* Main Navigation */}
-      <SidebarContent>
-        <SidebarMenu>
+      <SidebarContent className="px-3 py-2">
+        <div className={`mb-3.5 px-2 ${isCollapsed ? "sr-only" : "text-xs font-medium text-sidebar-foreground/50 uppercase tracking-wider"}`}>
+          Main Menu
+        </div>
+        <SidebarMenu className="space-y-1.5">
           {navigationItems.map((item) => (
             <SidebarMenuItem key={item.name}>
               <SidebarMenuButton
                 asChild
                 isActive={pathname === item.href}
                 tooltip={item.name}
+                className={`transition-all duration-200 rounded-lg ${
+                  pathname === item.href 
+                    ? "bg-sidebar-accent/15 shadow-sm" 
+                    : "hover:bg-sidebar-accent/10"
+                }`}
               >
-                <Link to={item.href} className="flex items-center gap-2">
-                  <item.icon className="h-5 w-5" />
-                  {!isCollapsed && <span>{item.name}</span>}
-                  {item.badge && (
-                    <Badge className="ml-auto bg-primary-500 text-white">
+                <Link to={item.href} className="flex items-center gap-3.5 py-2.5">
+                  <div className={`flex items-center justify-center w-8 h-8 rounded-md ${
+                    pathname === item.href 
+                      ? "bg-primary-500/15 text-primary-500" 
+                      : "text-sidebar-foreground/70"
+                  }`}>
+                    <item.icon className="h-[18px] w-[18px]" />
+                  </div>
+                  {!isCollapsed && <span className={`text-[14.5px] leading-none ${pathname === item.href ? "font-medium" : "font-normal"}`}>{item.name}</span>}
+                  {item.badge && !isCollapsed && (
+                    <Badge className="ml-auto bg-primary-500/90 text-white shadow-sm text-[10px] px-2 min-w-6 flex items-center justify-center">
                       {item.badge}
                     </Badge>
                   )}
@@ -128,19 +141,33 @@ export default function AppSidebar(
         </SidebarMenu>
       </SidebarContent>
 
-      {/* Secondary Navigation */}
-      <SidebarFooter>
-        <SidebarMenu>
+      {/* Secondary Navigation - Settings */}
+      <SidebarFooter className="mt-auto border-t border-sidebar-border/8 py-4 px-3">
+        <div className={`mb-3.5 px-2 ${isCollapsed ? "sr-only" : "text-xs font-medium text-sidebar-foreground/50 uppercase tracking-wider"}`}>
+          Settings
+        </div>
+        <SidebarMenu className="space-y-1.5">
           {secondaryNavItems.map((item) => (
             <SidebarMenuItem key={item.name}>
               <SidebarMenuButton
                 asChild
                 isActive={pathname === item.href}
                 tooltip={item.name}
+                className={`transition-all duration-200 rounded-lg ${
+                  pathname === item.href 
+                    ? "bg-sidebar-accent/15 shadow-sm" 
+                    : "hover:bg-sidebar-accent/10"
+                }`}
               >
-                <Link to={item.href} className="flex items-center gap-2">
-                  <item.icon className="h-5 w-5" />
-                  {!isCollapsed && <span>{item.name}</span>}
+                <Link to={item.href} className="flex items-center gap-3.5 py-2.5">
+                  <div className={`flex items-center justify-center w-8 h-8 rounded-md ${
+                    pathname === item.href 
+                      ? "bg-secondary-500/15 text-secondary-500" 
+                      : "text-sidebar-foreground/70"
+                  }`}>
+                    <item.icon className="h-[18px] w-[18px]" />
+                  </div>
+                  {!isCollapsed && <span className={`text-[14.5px] leading-none ${pathname === item.href ? "font-medium" : "font-normal"}`}>{item.name}</span>}
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -149,7 +176,7 @@ export default function AppSidebar(
       </SidebarFooter>
 
       {/* Rail / Collapsed View */}
-      <SidebarRail />
+      <SidebarRail className="hover:after:bg-sidebar-border/20" />
     </Sidebar>
   )
 }
@@ -163,7 +190,7 @@ function CollapseButton() {
       aria-label={
         state === "expanded" ? "Collapse sidebar" : "Expand sidebar"
       }
-      className="ml-auto p-2 rounded-md text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+      className="ml-auto p-2 rounded-md text-sidebar-foreground/60 hover:bg-sidebar-accent/10 hover:text-sidebar-accent-foreground transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/10"
     >
       {state === "expanded" ? (
         <ChevronLeft className="h-4 w-4" />

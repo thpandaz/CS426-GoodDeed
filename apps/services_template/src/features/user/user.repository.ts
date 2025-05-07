@@ -28,4 +28,9 @@ export class UserRepository {
       updatedAt: d.updatedAt,
     };
   }
+
+  async deleteUserAsync(id: string): Promise<boolean> {
+    const result = await UserModel.deleteOne({ _id: id }).exec();
+    return result.deletedCount === 1;
+  }
 }

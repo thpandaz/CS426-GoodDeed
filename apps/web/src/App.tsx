@@ -15,6 +15,8 @@ import UniversitiesPage   from "./pages/UniversititesPage"
 import ExplorePage        from "./pages/explorePage"
 import ErrorPage          from "./pages/errorPage"
 import OpportunitiesDashboard from "./pages/OpportunitiesPage"
+import EventsPage         from "./pages/EventsPage"
+import ProfilePage from "@repo/ui-web/components/profile/profile-page"
 
 export default function App() {
   return (
@@ -40,6 +42,8 @@ export default function App() {
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<ExplorePage />} />
             <Route path="/opportunities"  element={<OpportunitiesDashboard />} />
+            <Route path="/events"         element={<EventsPage />} />
+            <Route path="/profile"        element={<ProfilePage />} />
             {/* add more protected routes here */}
           </Route>
         </Route>

@@ -3,6 +3,7 @@ import { Button } from "@ui/components/ui/button"
 import { Badge } from "@ui/components/ui/badge"
 import { X } from "lucide-react"
 import { cn } from "@ui/lib/utils"
+import { Skeleton } from "@ui/components/ui/skeleton"
 
 interface OpportunityFiltersProps {
   categories: string[]
@@ -12,11 +13,64 @@ interface OpportunityFiltersProps {
   selectedLocation: string
   selectedSkills: string[]
   matchThreshold: number
+  isLoading?: boolean
   onCategoryChange: (category: string) => void
   onLocationChange: (location: string) => void
   onSkillsChange: (skills: string[]) => void
   onMatchThresholdChange: (threshold: number) => void
   onClearFilters: () => void
+}
+
+export function OpportunityFiltersSkeleton() {
+  return (
+    <div className="space-y-0 rounded-lg border border-gray-200/40 shadow-sm overflow-hidden bg-white/95">
+      <header className="flex items-center justify-between p-5 border-b border-gray-100/60">
+        <Skeleton className="h-6 w-20" />
+        <Skeleton className="h-8 w-16" />
+      </header>
+
+      {/* Match Threshold */}
+      <section className="p-5 border-b border-gray-100/60">
+        <Skeleton className="h-5 w-24 mb-3" />
+        <Skeleton className="h-2 w-full rounded-lg" />
+        <div className="mt-2.5 flex justify-between">
+          <Skeleton className="h-4 w-6" />
+          <Skeleton className="h-4 w-12" />
+          <Skeleton className="h-4 w-10" />
+        </div>
+      </section>
+
+      {/* Category */}
+      <section className="p-5 border-b border-gray-100/60">
+        <Skeleton className="h-5 w-24 mb-3" />
+        <div className="flex flex-col space-y-1.5">
+          {Array(5).fill(0).map((_, i) => (
+            <Skeleton key={i} className="h-9 w-full rounded-md" />
+          ))}
+        </div>
+      </section>
+
+      {/* Location */}
+      <section className="p-5 border-b border-gray-100/60">
+        <Skeleton className="h-5 w-24 mb-3" />
+        <div className="flex flex-col space-y-1.5">
+          {Array(4).fill(0).map((_, i) => (
+            <Skeleton key={i} className="h-9 w-full rounded-md" />
+          ))}
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section className="p-5">
+        <Skeleton className="h-5 w-24 mb-3" />
+        <div className="flex flex-wrap gap-2.5">
+          {Array(10).fill(0).map((_, i) => (
+            <Skeleton key={i} className="h-6 w-16 rounded-full" />
+          ))}
+        </div>
+      </section>
+    </div>
+  )
 }
 
 const OpportunityFilters: FC<OpportunityFiltersProps> = ({
@@ -27,6 +81,7 @@ const OpportunityFilters: FC<OpportunityFiltersProps> = ({
   selectedLocation,
   selectedSkills,
   matchThreshold,
+  isLoading = false,
   onCategoryChange,
   onLocationChange,
   onSkillsChange,
@@ -46,16 +101,20 @@ const OpportunityFilters: FC<OpportunityFiltersProps> = ({
         : [...selectedSkills, skill]
     )
 
+  if (isLoading) {
+    return <OpportunityFiltersSkeleton />
+  }
+
   return (
-    <div className="space-y-6">
-      <header className="flex items-center justify-between p-4 border-b">
-        <h2 className="text-lg font-semibold">Filters</h2>
+    <div className="space-y-0 rounded-lg border border-gray-200/40 shadow-sm overflow-hidden bg-white/95">
+      <header className="flex items-center justify-between p-5 border-b border-gray-100/60">
+        <h2 className="text-base font-semibold text-secondary-800">Filters</h2>
         {hasActive && (
           <Button
             variant="ghost"
             size="sm"
             onClick={onClearFilters}
-            className="h-8 text-xs"
+            className="h-8 text-xs text-primary-600 hover:text-primary-700 hover:bg-primary-50/60"
           >
             Clear All
           </Button>
@@ -63,8 +122,8 @@ const OpportunityFilters: FC<OpportunityFiltersProps> = ({
       </header>
 
       {/* Match Threshold */}
-      <section className="p-4 border-b">
-        <h3 className="mb-2 font-medium">Match %</h3>
+      <section className="p-5 border-b border-gray-100/60">
+        <h3 className="mb-3 font-medium text-sm text-secondary-800">Match %</h3>
         <input
           type="range"
           min={0}
@@ -74,27 +133,29 @@ const OpportunityFilters: FC<OpportunityFiltersProps> = ({
           onChange={(e) =>
             onMatchThresholdChange(Number(e.currentTarget.value))
           }
-          className="w-full h-2 bg-secondary-200 rounded-lg cursor-pointer"
+          className="w-full h-2 bg-gray-100 rounded-lg cursor-pointer accent-primary-500"
         />
-        <div className="mt-2 flex justify-between text-sm text-gray-500">
+        <div className="mt-2.5 flex justify-between text-xs text-gray-500">
           <span>0%</span>
-          <span>{matchThreshold}%+</span>
+          <span className="font-medium text-primary-600">{matchThreshold}%+</span>
           <span>100%</span>
         </div>
       </section>
 
       {/* Category */}
-      <section className="p-4 border-b">
-        <h3 className="mb-2 font-medium">Category</h3>
-        <div className="flex flex-col space-y-1">
+      <section className="p-5 border-b border-gray-100/60">
+        <h3 className="mb-3 font-medium text-sm text-secondary-800">Category</h3>
+        <div className="flex flex-col space-y-1.5">
           {categories.map((cat) => (
             <Button
               key={cat}
               variant="ghost"
               size="sm"
               className={cn(
-                "justify-start px-2 h-8 w-full",
-                selectedCategory === cat && "bg-primary-50 text-primary-500"
+                "justify-start px-3 h-9 w-full rounded-md",
+                selectedCategory === cat 
+                  ? "bg-primary-50/80 text-primary-600 font-medium" 
+                  : "text-secondary-700 hover:bg-gray-50/80"
               )}
               onClick={() => onCategoryChange(cat)}
             >
@@ -105,17 +166,19 @@ const OpportunityFilters: FC<OpportunityFiltersProps> = ({
       </section>
 
       {/* Location */}
-      <section className="p-4 border-b">
-        <h3 className="mb-2 font-medium">Location</h3>
-        <div className="flex flex-col space-y-1">
+      <section className="p-5 border-b border-gray-100/60">
+        <h3 className="mb-3 font-medium text-sm text-secondary-800">Location</h3>
+        <div className="flex flex-col space-y-1.5">
           {locations.map((loc) => (
             <Button
               key={loc}
               variant="ghost"
               size="sm"
               className={cn(
-                "justify-start px-2 h-8 w-full",
-                selectedLocation === loc && "bg-primary-50 text-primary-500"
+                "justify-start px-3 h-9 w-full rounded-md", 
+                selectedLocation === loc 
+                  ? "bg-primary-50/80 text-primary-600 font-medium" 
+                  : "text-secondary-700 hover:bg-gray-50/80"
               )}
               onClick={() => onLocationChange(loc)}
             >
@@ -126,9 +189,9 @@ const OpportunityFilters: FC<OpportunityFiltersProps> = ({
       </section>
 
       {/* Skills */}
-      <section className="p-4">
-        <h3 className="mb-2 font-medium">Skills</h3>
-        <div className="flex flex-wrap gap-2">
+      <section className="p-5">
+        <h3 className="mb-3 font-medium text-sm text-secondary-800">Skills</h3>
+        <div className="flex flex-wrap gap-2.5">
           {skills.map((skill) => {
             const active = selectedSkills.includes(skill)
             return (
@@ -136,15 +199,15 @@ const OpportunityFilters: FC<OpportunityFiltersProps> = ({
                 key={skill}
                 variant={active ? "default" : "outline"}
                 className={cn(
-                  "cursor-pointer",
+                  "cursor-pointer py-1 px-2.5 transition-colors",
                   active
-                    ? "bg-primary-500 hover:bg-primary-600 text-white"
-                    : "hover:bg-primary-50"
+                    ? "bg-primary-500 hover:bg-primary-600 text-white shadow-sm"
+                    : "hover:bg-primary-50/70 border-gray-200/70 text-secondary-700"
                 )}
                 onClick={() => toggleSkill(skill)}
               >
                 {skill}
-                {active && <X className="ml-1 h-3 w-3" />}
+                {active && <X className="ml-1.5 h-3 w-3" />}
               </Badge>
             )
           })}
