@@ -45,7 +45,7 @@ export default function OpportunitiesDashboard() {
     const [opportunities, setOpportunities] = useState<OpportunityType[]>([])
     const [loading, setLoading] = useState(true)
 
-    const PAGE_SIZE = 10
+    const PAGE_SIZE = 5
     const page = Number(searchParams.get("page") || "1")
     const totalItems = opportunities.length
     const totalPages = Math.ceil(totalItems / PAGE_SIZE)
@@ -64,7 +64,7 @@ export default function OpportunitiesDashboard() {
     const fetchOpportunities = async () => {
         setLoading(true)
         try {
-            const qs = new URLSearchParams(filters).toString()
+            // const qs = new URLSearchParams(filters).toString()
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 500))
             setOpportunities(opp)

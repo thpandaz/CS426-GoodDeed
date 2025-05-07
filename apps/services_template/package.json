@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc && tsup",
     "clean": "rm -rf dist",
-    "dev": "node --import=tsx --watch -r tsconfig-paths/register src/index.ts",
+    "dev": "nodemon -r tsconfig-paths/register --exec tsx src/index.ts",
     "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0",
     "test": "jest --detectOpenHandles"
   },
