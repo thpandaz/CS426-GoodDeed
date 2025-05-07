@@ -13,7 +13,7 @@ import { baseLogger, rateLimiter, errorHandlers } from '@repo/middleware';
 import { connectDB } from '@repo/db';
 import { env } from '@repo/utils';
 
-const logger = baseLogger.child({ module: 'service-name-template' });
+const logger = baseLogger.child({ module: 'organization-service' });
 const port = env.PORT;
 
 // Helper: sanitizes only body and params data
@@ -107,7 +107,7 @@ async function start(): Promise<void> {
     app.use(sanitizeBodyAndParams);
 
     // API Routes
-    app.use('/service-name-template/v1', appRouter);
+    app.use('/organization-service/v1', appRouter);
 
     // Error Handlers
     app.use(...errorHandlers);
