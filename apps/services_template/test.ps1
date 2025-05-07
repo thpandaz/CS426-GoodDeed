@@ -18,7 +18,8 @@ function Invoke-ApiRequest {
     try {
         if ($Body) {
             $response = Invoke-RestMethod -Uri $Uri -Method $Method -Headers $headers -Body $Body
-        } else {
+        }
+        else {
             $response = Invoke-RestMethod -Uri $Uri -Method $Method -Headers $headers
         }
         Write-Host "Success: $TestName"
