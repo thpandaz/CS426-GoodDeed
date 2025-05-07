@@ -38,7 +38,6 @@ class UserController {
       next(err);
     }
   };
-
 }
 
 export const userController = new UserController();

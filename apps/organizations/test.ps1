@@ -1,7 +1,7 @@
 # Test script for organization endpoints
 
 # Base URL
-$baseUrl = "http://localhost:8000/organization-service/v1/organizations"
+$baseUrl = "http://localhost:3001/organizations-service/v1/organizations"
 $headers = @{
     "Content-Type" = "application/json"
 }

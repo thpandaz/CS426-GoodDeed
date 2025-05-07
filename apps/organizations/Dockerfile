@@ -16,7 +16,7 @@ RUN pnpm install --frozen-lockfile
 
 # copy source & prune down to services_template
 COPY . .
-RUN pnpm dlx turbo prune services_template --docker
+RUN pnpm dlx turbo prune organizations --docker
 
 # 3) installer: install pruned dependencies & build
 FROM base AS installer
@@ -56,4 +56,4 @@ COPY --from=installer /apps ./
 VOLUME ["/apps/logs"]
 
 # run without tsconfig-paths preloading since alias paths are already rewritten
-CMD ["node", "apps/services_template/dist/index.js"]
+CMD ["node", "apps/organizations/dist/index.js"]

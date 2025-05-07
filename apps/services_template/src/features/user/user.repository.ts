@@ -28,5 +28,4 @@ export class UserRepository {
       updatedAt: d.updatedAt,
     };
   }
-
 }

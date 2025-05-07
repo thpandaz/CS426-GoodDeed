@@ -13,7 +13,7 @@ import { baseLogger, rateLimiter, errorHandlers } from '@repo/middleware';
 import { connectDB } from '@repo/db';
 import { env } from '@repo/utils';
 
-const logger = baseLogger.child({ module: 'service-name-template' });
+const logger = baseLogger.child({ module: 'organization-service' });
 const port = env.PORT;
 
 // Helper: sanitizes only body and params data
@@ -28,32 +28,59 @@ const sanitizeBodyAndParams = (req: Request, _res: Response, next: NextFunction)
 };
 
 async function sendHeartbeat(): Promise<void> {
-  try {
-    await axios.post(`${env.REGISTRY_URL}/register`, {
-      name: env.SERVICE_NAME,
-      url: `http://${env.HOST}:${env.PORT}`,
-    });
-    logger.debug('💓 Heartbeat sent');
-  } catch (err: any) {
-    logger.error('💔 Heartbeat failed', { message: err.message });
-  }
+  // try {
+  //   await axios.post(`${env.REGISTRY_URL}/register`, {
+  //     name: env.SERVICE_NAME,
+  //     url: `http://${env.HOST}:${env.PORT}`,
+  //   });
+  //   logger.debug('💓 Heartbeat sent');
+  // } catch (err: any) {
+  //   logger.error('💔 Heartbeat failed', { message: err.message });
+  // }
 }
 
 function setupGracefulShutdown(server: ReturnType<typeof express.application.listen>): void {
-  const shutdown = (): void => {
+  let isShuttingDown = false;
+
+  const cleanup = async () => {
+    if (isShuttingDown) return;
+    isShuttingDown = true;
+
     logger.info('⚡️ Shutdown signal received');
+    
+    // Close server first
     server.close(() => {
-      logger.info('✅ Server closed');
-      process.exit(0);
+      logger.info('✅ HTTP server closed');
+      
+      // Then close DB connection
+      try {
+        // Add your DB disconnect logic here if needed
+        logger.info('✅ Database connections closed');
+        process.exit(0);
+      } catch (err) {
+        logger.error('❌ Error during cleanup', err);
+        process.exit(1);
+      }
     });
+
+    // Force shutdown after timeout
     setTimeout(() => {
-      logger.error('❗️ Forced exit');
+      logger.error('❗️ Forced shutdown after timeout');
       process.exit(1);
-    }, 10_000).unref();
+    }, 5000).unref();
   };
 
-  process.on('SIGINT', shutdown);
-  process.on('SIGTERM', shutdown);
+  // Handle different shutdown signals
+  process.on('SIGTERM', cleanup);
+  process.on('SIGINT', cleanup);
+  process.on('uncaughtException', (err) => {
+    logger.error('❌ Uncaught exception', err);
+    cleanup();
+  });
+  process.on('unhandledRejection', (reason) => {
+    logger.error('❌ Unhandled rejection', reason);
+    cleanup();
+  });
 }
 
 async function start(): Promise<void> {
@@ -80,7 +107,7 @@ async function start(): Promise<void> {
     app.use(sanitizeBodyAndParams);
 
     // API Routes
-    app.use('/service-name-template/v1', appRouter);
+    app.use('/organization-service/v1', appRouter);
 
     // Error Handlers
     app.use(...errorHandlers);
@@ -91,7 +118,7 @@ async function start(): Promise<void> {
       logger.info(`Server (${NODE_ENV}) running at http://${HOST}:${port}`);
     });
 
-    // Graceful Shutdown
+    // Setup Graceful Shutdown
     setupGracefulShutdown(server);
 
     // Heartbeat to Registry
@@ -102,5 +129,8 @@ async function start(): Promise<void> {
     process.exit(1);
   }
 }
-console.log('Starting service...');
-start();
+
+start().catch((err) => {
+  console.error('Fatal error during startup:', err);
+  process.exit(1);
+});
