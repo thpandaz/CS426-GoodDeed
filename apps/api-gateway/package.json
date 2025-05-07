@@ -1,0 +1,29 @@
+{
+  "name": "api-gateway",
+  "type": "module",
+  "main": "index.ts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc && tsup",
+    "clean": "rm -rf dist",
+    "dev": "nodemon -r tsconfig-paths/register --exec tsx src/index.ts",
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0",
+    "test": "jest --detectOpenHandles"
+  },
+  "jest": {
+    "preset": "@repo/jest-presets/node"
+  },
+  "dependencies": {
+    "@repo/db": "workspace:*",
+    "@repo/middleware": "workspace:*",
+    "@repo/models": "workspace:*",
+    "@repo/utils": "workspace:*",
+    "axios": "^1.9.0",
+    "express": "^5.1.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.1"
+}
