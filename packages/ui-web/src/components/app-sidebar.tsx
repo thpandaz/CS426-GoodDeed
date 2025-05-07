@@ -4,15 +4,11 @@ import React from "react"
 import { Link, useLocation } from "react-router-dom"
 import {
   Home,
-  Search,
   User as UserIcon,
   Calendar,
   Briefcase,
-  MessageSquare,
-  Bell,
   Settings,
   Heart,
-  Users,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react"
@@ -25,7 +21,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-  SidebarSeparator,
   useSidebar,
 } from "@ui/components/ui/sidebar"
 import { Avatar, AvatarImage, AvatarFallback } from "@ui/components/ui/avatar"
@@ -33,8 +28,16 @@ import { Badge } from "@ui/components/ui/badge"
 import { getIntials } from "@repo/utils/render"
 import { useUser } from "@clerk/clerk-react"
 
+// Navigation item type
+interface NavigationItem {
+  name: string;
+  href: string;
+  icon: React.ComponentType<any>;
+  badge?: string | number;
+}
+
 // Primary navigation items
-const navigationItems = [
+const navigationItems: NavigationItem[] = [
   { name: "Dashboard",     href: "/dashboard",     icon: Home       },
   // { name: "Explore",       href: "/explore",       icon: Search     },
   { name: "Profile",       href: "/profile",       icon: UserIcon   },
@@ -47,7 +50,7 @@ const navigationItems = [
 ]
 
 // Secondary navigation items
-const secondaryNavItems = [
+const secondaryNavItems: NavigationItem[] = [
   { name: "Settings", href: "/settings", icon: Settings },
 ]
 
