@@ -1,0 +1,69 @@
+{
+  "name": "organizations",
+  "type": "module",
+  "main": "index.ts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc && tsup",
+    "clean": "rm -rf dist",
+    "dev": "nodemon -r tsconfig-paths/register --exec tsx src/index.ts",
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0",
+    "test": "jest --detectOpenHandles"
+  },
+  "jest": {
+    "preset": "@repo/jest-presets/node"
+  },
+  "dependencies": {
+    "@repo/db": "workspace:*",
+    "@repo/middleware": "workspace:*",
+    "@repo/models": "workspace:*",
+    "@repo/utils": "workspace:*",
+    "axios": "^1.9.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-xss-sanitizer": "^2.0.0",
+    "helmet": "^8.1.0",
+    "http-status-codes": "^2.3.0",
+    "mongoose": "^8.14.0",
+    "tsconfig-paths": "^4.2.0",
+    "tsup": "^8.4.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/jest-presets": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.24",
+    "@types/supertest": "^6.0.2",
+    "@types/uuid": "^9.0.8",
+    "esbuild": "^0.20.1",
+    "esbuild-register": "^3.5.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^6.3.3",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.3",
+    "typescript": "5.5.4"
+  },
+  "tsup": {
+		"entry": ["src/index.ts"],
+		"outDir": "dist",
+		"format": ["esm", "cjs"],
+		"target": "es2020",
+		"sourcemap": true,
+		"clean": true,
+		"dts": true,
+		"splitting": false,
+		"skipNodeModulesBundle": true
+	}
+}

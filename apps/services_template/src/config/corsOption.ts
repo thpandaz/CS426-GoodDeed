@@ -3,7 +3,7 @@
  */
 import { env } from "@repo/utils";
 
-const whitelist = env.CORS_ORIGINS;
+const whitelist = env.CORS_ORIGINS as string[];
 
 const corsOptions = {
     /**
@@ -12,13 +12,7 @@ const corsOptions = {
      * @param callback - The callback function to be called with the result.
      */
     origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) {
-            callback(null, true);
-            return;
-        }
-
-        if (whitelist.indexOf(origin) !== -1 || env.NODE_ENV === 'development') {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));

@@ -1,0 +1,42 @@
+{
+  "name": "registry",
+  "type": "module",
+  "main": "index.ts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc && tsup",
+    "clean": "rm -rf dist",
+    "dev": "nodemon -r tsconfig-paths/register --exec tsx src/index.ts",
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0",
+    "test": "jest --detectOpenHandles",
+    "test-registry": "tsx src/test-registry.ts"
+  },
+  "jest": {
+    "preset": "@repo/jest-presets/node"
+  },
+  "dependencies": {
+    "@repo/db": "workspace:*",
+    "@repo/middleware": "workspace:*",
+    "@repo/models": "workspace:*",
+    "@repo/utils": "workspace:*",
+    "express": "^4.18.3",
+    "cors": "^2.8.5",
+    "helmet": "^8.1.0",
+    "axios": "^1.9.0",
+    "body-parser": "^1.20.2",
+    "tsup": "^8.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/node": "^20.11.24",
+    "nodemon": "^3.1.0",
+    "tsx": "^4.19.3",
+    "typescript": "5.5.4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.1"
+}
