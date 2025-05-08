@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import { Phong, Cameron, Grabiel, Logo } from '@repo/assets'
 import { Button } from '@repo/ui-web/components/ui/button'
-import { getIntials } from '@repo/utils/render'
+import { getIntials } from '@repo/ui-web/lib/render'
 
 const team = [
   { name: 'Jacob Beaumont', role: 'Co-Founder', image: '' },

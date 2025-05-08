@@ -17,7 +17,7 @@ import {
   Heart,
   Star
 } from "lucide-react"
-import { getIntials } from "@repo/utils/render"
+import { getIntials } from "@ui/lib/render"
 
 export default function ProfilePage() {
   const { user } = useUser()

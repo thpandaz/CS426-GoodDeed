@@ -80,8 +80,6 @@ const categories = [
 export default function ExplorePage() {
   const { user, isLoaded } = useUser()
   const [isLoading, setIsLoading] = useState(true)
-  const [eventSearchTerm, setEventSearchTerm] = useState("")
-  const [savedEvents, setSavedEvents] = useState(events.filter(event => event.isSaved))
   
   // Simulating data loading
   useEffect(() => {
@@ -117,12 +115,12 @@ export default function ExplorePage() {
     .slice(0, 2)
       
   // Toggle event saved state
-  const toggleSaveEvent = (eventId: string) => {
-    const updatedEvents = events.map(event => 
-      event.id === eventId ? { ...event, isSaved: !event.isSaved } : event
-    )
-    setSavedEvents(updatedEvents.filter(event => event.isSaved))
-  }
+  // const toggleSaveEvent = (eventId: string) => {
+  //   const updatedEvents = events.map(event => 
+  //     event.id === eventId ? { ...event, isSaved: !event.isSaved } : event
+  //   )
+  //   setSavedEvents(updatedEvents.filter(event => event.isSaved))
+  // }
 
   return (
     <div className="bg-gray-50/50 min-h-screen font-family-sans">
@@ -288,7 +286,7 @@ export default function ExplorePage() {
                         <h3 className="font-medium text-secondary-800 mb-1">{event.organizer}</h3>
                       </div>
                       <button 
-                        onClick={() => toggleSaveEvent(event.id)}
+                        // onClick={() => toggleSaveEvent(event.id)}
                         className={cn(
                           "h-8 w-8 rounded-full flex items-center justify-center",
                           event.isSaved ? "text-primary-500" : "text-gray-300 hover:text-primary-400"

@@ -138,7 +138,7 @@ interface FeaturePanelProps {
   onInView: () => void
 }
 
-function FeaturePanel({ feature, index, onInView }: FeaturePanelProps) {
+function FeaturePanel({ feature, onInView }: FeaturePanelProps) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { amount: 0.5, once: false })
 

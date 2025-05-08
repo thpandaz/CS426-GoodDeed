@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@ui/components/ui/button";
@@ -75,11 +75,15 @@ export const NavBar = () => {
         <div className="flex items-center justify-end gap-4">
           {/* desktop-only links */}
           <SignedOut>
-            <SignInButton mode="modal" className="hidden md:block text-sm font-medium text-secondary-600 transition-colors duration-500 ease-in-out hover:text-primary-500 px-3 py-2 rounded-md hover:bg-accent-50 cursor-pointer" />
+            <SignInButton mode="modal">
+              <button className="hidden md:block text-sm font-medium text-secondary-600 transition-colors duration-500 ease-in-out hover:text-primary-500 px-3 py-2 rounded-md hover:bg-accent-50 cursor-pointer">
+                Sign In
+              </button>
+            </SignInButton>
             <SignUpButton mode="modal">
-              <Button className="hidden md:block bg-primary-500/80 hover:bg-primary-500 text-white rounded-full px-6 transition-transform duration-500 ease-in-out hover:scale-105 cursor-pointer">
-              Get Started
-              </Button>
+              <button className="hidden md:block bg-primary-500/80 hover:bg-primary-500 text-white rounded-full px-6 transition-transform duration-500 ease-in-out hover:scale-105 cursor-pointer">
+                Get Started
+              </button>
             </SignUpButton>
           </SignedOut>
           <SignedIn>

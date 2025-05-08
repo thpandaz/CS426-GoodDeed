@@ -1,5 +1,4 @@
 import { GatewayConfig } from '../types/index.js';
-import { env } from '@repo/utils';
 
 // Helper function for safe environment variable access
 const getEnvVar = (key: string, defaultValue: string): string => {
@@ -45,7 +44,7 @@ const gatewayConfig: GatewayConfig = {
           methods: ['GET'],
           store: useRedis ? 'redis' : 'memory',
           redisUrl
-        }
+        },
       }
     },
     

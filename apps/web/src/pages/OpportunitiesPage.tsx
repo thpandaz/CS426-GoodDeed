@@ -93,6 +93,10 @@ export default function OpportunitiesDashboard() {
 
   }
 
+  const onOpenChange = (open: boolean) => {
+    console.log("open", open)
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
@@ -131,7 +135,7 @@ export default function OpportunitiesDashboard() {
             </DropdownMenu>
 
             {!isDesktop && (
-              <Drawer onOpenChange={(open) => {/* track open state if you want */}}>
+              <Drawer onOpenChange={onOpenChange}>
                 <DrawerTrigger asChild>
                   <Button variant="outline" className="flex items-center gap-2">
                     <SlidersHorizontal className="h-4 w-4" /> Filters
@@ -231,9 +235,6 @@ export default function OpportunitiesDashboard() {
                         opportunities={pageItems} 
                         view={filters.view} 
                         onPageChange={goToPage}
-                        pageSize={PAGE_SIZE}
-                        totalItems={totalItems}
-                        page={page}
                         />
                       {/* PAGINATION CONTROLS (must live inside the TabPanel) */}
                       {totalPages > 1 && (

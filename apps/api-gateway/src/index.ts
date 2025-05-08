@@ -11,7 +11,6 @@ import errorHandler, { notFoundHandler } from './middleware/errorHandler.js';
 import requestLogger from './middleware/requestLogger.js';
 import gatewayConfig from './config/gateway.config.js';
 import { setupRoutes, HttpServiceRegistry  } from './routes/index.js';
-import type { ServiceRegistry } from './types/index.js';
 
 // Create logger instance
 const logger = baseLogger.child({ module: 'APIGateway' });
@@ -19,6 +18,25 @@ const logger = baseLogger.child({ module: 'APIGateway' });
 // Initialize Express app
 const app: Express = express();
 const port = process.env.PORT ? parseInt(process.env.PORT) : 4000;
+
+function setupGracefulShutdown(server: ReturnType<typeof express.application.listen>): void {
+  const shutdown = async (): Promise<void> => {
+    logger.info('⚡️ Shutdown signal received');
+    
+    server.close(() => {
+      logger.info('✅ Server closed');
+      process.exit(0);
+    });    
+    // Force exit after timeout
+    setTimeout(() => {
+      logger.error('❗️ Forced exit');
+      process.exit(1);
+    }, 10_000).unref();
+  };
+
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
+}
 
 // Apply middleware
 app.use(requestLogger);
@@ -74,12 +92,6 @@ const server = app.listen(port, () => {
 });
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM signal received. Closing server...');
-  server.close(() => {
-    logger.info('Server closed');
-    process.exit(0);
-  });
-});
+setupGracefulShutdown(server);
 
 export default app; 

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { BrowserRouter, useNavigate  } from "react-router-dom";
+import { BrowserRouter  } from "react-router-dom";
 import { ClerkProvider } from '@clerk/clerk-react'
 import reportWebVitals from "./reportWebVitals";
 
@@ -21,28 +21,27 @@ if (!SIGN_UP_REDIRECT) {
   throw new Error("Missing Sign Up Fallback Redirect URL")
 }
 
-const ClerkWrapper = () => {
-  const navigate = useNavigate()
+console.log(
+  'Mode:', import.meta.env.MODE,
+  'Clerk Key:', import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+)
 
-  return (
-    <ClerkProvider
-      publishableKey={PUBLISHABLE_KEY}
-      signInFallbackRedirectUrl={SIGN_IN_REDIRECT}
-      signUpFallbackRedirectUrl={SIGN_UP_REDIRECT}
-      afterSignOutUrl="/"
-      routerPush={(to) => navigate(to)}
-      routerReplace={(to) => navigate(to, { replace: true })}
-    >
-      <App />
-    </ClerkProvider>
-  )
-}
+// const navigate = useNavigate()
 
 ReactDOM.createRoot(document.getElementById("app")!).render(
   <React.StrictMode>
-     <BrowserRouter>
-      <ClerkWrapper />
-    </BrowserRouter>
+    <ClerkProvider
+        publishableKey={PUBLISHABLE_KEY}
+        signInFallbackRedirectUrl={SIGN_IN_REDIRECT}
+        signUpFallbackRedirectUrl={SIGN_UP_REDIRECT}
+        afterSignOutUrl="/"
+        // routerPush={(to) => navigate(to)}
+        // routerReplace={(to) => navigate(to, { replace: true })}
+      >
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
+    </ClerkProvider>
   </React.StrictMode>
 );
 

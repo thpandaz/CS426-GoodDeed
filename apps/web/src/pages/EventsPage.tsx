@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { useUser } from "@clerk/clerk-react"
 import { Button } from "@repo/ui-web/components/ui/button"
 import { Input } from "@repo/ui-web/components/ui/input"
 import { Card, CardContent, CardFooter } from "@repo/ui-web/components/ui/card"
@@ -88,11 +87,11 @@ const filterOptions = {
 }
 
 export default function EventsPage() {
-  const { user } = useUser()
+  // State declarations
   const [searchTerm, setSearchTerm] = useState("")
   const [savedEvents, setSavedEvents] = useState(events.filter(event => event.isSaved))
-  const [registeredEvents, setRegisteredEvents] = useState(events.filter(event => event.isRegistered))
-  const [checkedInEvents, setCheckedInEvents] = useState(events.filter(event => event.checkedIn))
+  const [registeredEvents] = useState(events.filter(event => event.isRegistered))
+  const [checkedInEvents] = useState(events.filter(event => event.checkedIn))
   const [filteredEvents, setFilteredEvents] = useState(events)
   
   // Event quick links

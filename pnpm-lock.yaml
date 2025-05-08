@@ -93,6 +93,9 @@ importers:
       morgan:
         specifier: ^1.10.0
         version: 1.10.0
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.3)(typescript@5.5.4)(yaml@2.7.1)
       zod:
         specifier: ^3.24.2
         version: 3.24.3
@@ -224,6 +227,112 @@ importers:
       vite:
         specifier: ^5.1.4
         version: 5.4.18(@types/node@20.17.30)(lightningcss@1.29.2)
+
+  apps/opportunites:
+    dependencies:
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@repo/middleware':
+        specifier: workspace:*
+        version: link:../../packages/middleware
+      '@repo/models':
+        specifier: workspace:*
+        version: link:../../packages/models
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      axios:
+        specifier: ^1.9.0
+        version: 1.9.0
+      body-parser:
+        specifier: ^1.20.2
+        version: 1.20.3
+      cookie-parser:
+        specifier: ^1.4.7
+        version: 1.4.7
+      cors:
+        specifier: ^2.8.5
+        version: 2.8.5
+      express:
+        specifier: ^4.18.3
+        version: 4.21.2
+      express-mongo-sanitize:
+        specifier: ^2.2.0
+        version: 2.2.0
+      express-xss-sanitizer:
+        specifier: ^2.0.0
+        version: 2.0.0
+      helmet:
+        specifier: ^8.1.0
+        version: 8.1.0
+      http-status-codes:
+        specifier: ^2.3.0
+        version: 2.3.0
+      mongoose:
+        specifier: ^8.14.0
+        version: 8.14.0(socks@2.8.4)
+      tsconfig-paths:
+        specifier: ^4.2.0
+        version: 4.2.0
+      tsup:
+        specifier: ^8.4.0
+        version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.3)(typescript@5.5.4)(yaml@2.7.1)
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.3
+    devDependencies:
+      '@jest/globals':
+        specifier: ^29.7.0
+        version: 29.7.0
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@repo/jest-presets':
+        specifier: workspace:*
+        version: link:../../packages/jest-presets
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      '@types/body-parser':
+        specifier: ^1.19.5
+        version: 1.19.5
+      '@types/cors':
+        specifier: ^2.8.17
+        version: 2.8.17
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.21
+      '@types/node':
+        specifier: ^20.11.24
+        version: 20.17.30
+      '@types/supertest':
+        specifier: ^6.0.2
+        version: 6.0.3
+      esbuild:
+        specifier: ^0.20.1
+        version: 0.20.2
+      esbuild-register:
+        specifier: ^3.5.0
+        version: 3.6.0(esbuild@0.20.2)
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@20.17.30)(ts-node@10.9.2(@types/node@20.17.30)(typescript@5.5.4))
+      nodemon:
+        specifier: ^3.1.0
+        version: 3.1.10
+      supertest:
+        specifier: ^6.3.3
+        version: 6.3.4
+      tsx:
+        specifier: ^4.19.3
+        version: 4.19.3
+      typescript:
+        specifier: 5.5.4
+        version: 5.5.4
 
   apps/organizations:
     dependencies:
@@ -370,6 +479,15 @@ importers:
         specifier: ^8.4.0
         version: 8.4.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.3)(typescript@5.5.4)(yaml@2.7.1)
     devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@repo/jest-presets':
+        specifier: workspace:*
+        version: link:../../packages/jest-presets
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.17
@@ -509,9 +627,6 @@ importers:
       '@repo/ui-web':
         specifier: workspace:*
         version: link:../../packages/ui-web
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@18.3.1)
@@ -719,9 +834,9 @@ importers:
 
   packages/middleware:
     dependencies:
-      '@clerk/clerk-sdk-node':
-        specifier: ^5.1.6
-        version: 5.1.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@clerk/express':
+        specifier: ^1.4.16
+        version: 1.4.16(express@4.21.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@types/opossum':
         specifier: ^8.1.8
         version: 8.1.8
@@ -968,9 +1083,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../utils
       '@tailwindcss/postcss':
         specifier: ^4.0.8
         version: 4.1.4
@@ -1264,22 +1376,11 @@ packages:
       react: ^18.0.0 || ^19.0.0 || ^19.0.0-0
       react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-0
 
-  '@clerk/clerk-sdk-node@5.1.6':
-    resolution: {integrity: sha512-KeF5p0XP0gNoCx+YIHrfrkNNADBz8ZabwPAhOiJZ9Wo14r93WlzRA51IE0Qgteej8IpWwnvKu4/MpiV7FFoLqA==}
-    engines: {node: '>=18.17.0'}
-    deprecated: 'January 10 2025 marks the end of support for @clerk/clerk-sdk-node as previously announced in our October 2024 deprecation notice. Express users can migrate to the @clerk/express package. For more information, you can find our changelog here: https://clerk.com/changelog/2025-01-10-node-sdk-eol'
-
-  '@clerk/shared@2.22.0':
-    resolution: {integrity: sha512-VWBeddOJVa3sqUPdvquaaQYw4h5hACSG3EUDOW7eSu2F6W3BXUozyLJQPBJ9C0MuoeHhOe/DeV8x2KqOgxVZaQ==}
+  '@clerk/express@1.4.16':
+    resolution: {integrity: sha512-H8vBzlkQETSwXLuICKWA/jjjWu9DGH1QckH2GOcXdXSwYQyQ8NcVf5gLoJKlJ+zr9obCNGZqX7dsTUQioa2CEg==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
-      react: ^18.0.0 || ^19.0.0 || ^19.0.0-0
-      react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-0
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-dom:
-        optional: true
+      express: ^4.17.0 || ^5.0.0
 
   '@clerk/shared@3.7.8':
     resolution: {integrity: sha512-+cjMDYORJ73pHp1vsn/6jaMPjSVeU01oXyHTTm3e3pm0C7YShMxEklVkZYg8uVEhAfNKSqdqwo3EKR4tuLEabw==}
@@ -6299,9 +6400,6 @@ packages:
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
-  tslib@2.4.1:
-    resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
-
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
@@ -6943,28 +7041,17 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       tslib: 2.8.1
 
-  '@clerk/clerk-sdk-node@5.1.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@clerk/express@1.4.16(express@4.21.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@clerk/backend': 1.31.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@clerk/shared': 2.22.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@clerk/types': 4.56.3
-      tslib: 2.4.1
+      '@clerk/shared': 3.8.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@clerk/types': 4.57.1
+      express: 4.21.2
+      tslib: 2.8.1
     transitivePeerDependencies:
       - react
       - react-dom
       - svix
-
-  '@clerk/shared@2.22.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
-    dependencies:
-      '@clerk/types': 4.56.3
-      dequal: 2.0.3
-      glob-to-regexp: 0.4.1
-      js-cookie: 3.0.5
-      std-env: 3.9.0
-      swr: 2.3.3(react@19.1.0)
-    optionalDependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
 
   '@clerk/shared@3.7.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -12416,8 +12503,6 @@ snapshots:
       strip-bom: 3.0.0
 
   tslib@1.14.1: {}
-
-  tslib@2.4.1: {}
 
   tslib@2.6.2: {}
 

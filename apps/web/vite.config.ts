@@ -4,6 +4,11 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
 
 export default defineConfig({
+
+  root: __dirname,
+
+  envDir: __dirname,
+
   plugins: [
     react(),
     tsconfigPaths({
@@ -17,10 +22,36 @@ export default defineConfig({
     alias: {
       '@ui': path.resolve(__dirname, '../../packages/ui-web/src'),
     },
+    dedupe: [
+      'react',
+      'react-dom',
+      '@clerk/clerk-react',
+      'react-router-dom',
+    ],
+  },
+  optimizeDeps: {
+    include: [
+      '@clerk/clerk-react',
+      'react-router-dom',
+      'lucide-react',
+      // any other shared workspace packages
+    ],
   },
   server: {
     port: 8000,
-    fs: { allow: [process.cwd(), path.resolve(process.cwd(), 'packages')] },
+    fs: { 
+      allow: [
+      // Current directory
+      process.cwd(),
+      // Root of monorepo
+      path.resolve(__dirname, '../..'),
+      // Explicit packages directory
+      path.resolve(__dirname, '../../packages')
+    ] 
+   },
     allowedHosts: ['all', '0cda-128-119-202-12.ngrok-free.app'],
+  },
+  build: {
+    sourcemap: true,
   },
 });

@@ -1,8 +1,6 @@
 "use client"
 
 import { ScrollReveal } from "./ui/scroll-reveal"
-import { useEffect, useRef, useState } from "react"
-import { cn } from "@ui/lib/utils"
 import StickyFeatures from "./StickyFeatures"
 
 const DynamicEllipse = () => (

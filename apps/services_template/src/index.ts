@@ -34,7 +34,7 @@ async function sendHeartbeat(): Promise<void> {
       name: env.SERVICE_NAME,
       url: `http://${env.HOST}:${env.PORT}`,
     });
-    logger.debug('💓 Heartbeat sent to registry');
+    // logger.debug('💓 Heartbeat sent to registry');
   } catch (err: any) {
     logger.error('💔 Heartbeat failed', { message: err.message });
   }
@@ -64,8 +64,7 @@ function setupGracefulShutdown(server: ReturnType<typeof express.application.lis
     server.close(() => {
       logger.info('✅ Server closed');
       process.exit(0);
-    });
-    
+    });    
     // Force exit after timeout
     setTimeout(() => {
       logger.error('❗️ Forced exit');
@@ -134,5 +133,4 @@ async function start(): Promise<void> {
     process.exit(1);
   }
 }
-console.log('Starting service...');
 start();
