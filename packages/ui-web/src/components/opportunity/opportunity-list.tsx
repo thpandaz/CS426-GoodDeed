@@ -1,7 +1,7 @@
 import { Badge } from "@repo/ui-web/components/ui/badge"
 import { Button } from "@repo/ui-web/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@repo/ui-web/components/ui/card"
-import { Bookmark, BookmarkCheck, Calendar, Clock, MapPin, Star } from "lucide-react"
+import { Bookmark, BookmarkCheck, Calendar, Clock, MapPin } from "lucide-react"
 import { useState } from "react"
 import { cn } from "@repo/ui-web/lib/utils"
 import { Link } from "react-router-dom"
@@ -11,9 +11,6 @@ import { OpportunityListSkeleton } from "./opportunity-skeleton"
 interface OpportunityListProps {
     opportunities: OpportunityType[]
     view: string
-    page: number
-    pageSize: number
-    totalItems: number
     isLoading?: boolean
     onPageChange: (newPage: number) => void
 }
@@ -21,13 +18,8 @@ interface OpportunityListProps {
 export default function OpportunityList({
     opportunities,
     view,
-    page,
-    pageSize,
-    totalItems,
     isLoading = false,
-    onPageChange,
 }: OpportunityListProps) {
-    const totalPages = Math.ceil(totalItems / pageSize)
     
     if (isLoading) {
         return <OpportunityListSkeleton view={view as "grid" | "list"} />
@@ -67,7 +59,7 @@ interface OpportunityCardProps {
     view: string
 }
 
-function OpportunityCard({ opportunity, view }: OpportunityCardProps) {
+function OpportunityCard({ opportunity }: OpportunityCardProps) {
     const [isSaved, setIsSaved] = useState(opportunity.status === "saved")
 
     const handleSave = () => {

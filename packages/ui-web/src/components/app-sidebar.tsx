@@ -25,7 +25,7 @@ import {
 } from "@ui/components/ui/sidebar"
 import { Avatar, AvatarImage, AvatarFallback } from "@ui/components/ui/avatar"
 import { Badge } from "@ui/components/ui/badge"
-import { getIntials } from "@repo/utils/render"
+import { getIntials } from "@ui/lib/render"
 import { useUser } from "@clerk/clerk-react"
 
 // Navigation item type

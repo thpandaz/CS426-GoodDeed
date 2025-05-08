@@ -1,6 +1,5 @@
 "use client"
 
-import React from "react"
 import { Button } from "@ui/components/ui/button"
 import { Input } from "@ui/components/ui/input"
 import { Building2, ChevronRight, Heart, Search } from "lucide-react"

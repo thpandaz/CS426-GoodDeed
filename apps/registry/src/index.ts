@@ -26,6 +26,25 @@ const HEARTBEAT_INTERVAL = parseInt(process.env.HEARTBEAT_INTERVAL_MS || '30000'
 const CLEANUP_INTERVAL = parseInt(process.env.CLEANUP_INTERVAL_MS || '60000', 10);
 const HEARTBEAT_TIMEOUT = parseInt(process.env.HEARTBEAT_TIMEOUT_MS || '90000', 10);
 
+function setupGracefulShutdown(server: ReturnType<typeof express.application.listen>): void {
+  const shutdown = async (): Promise<void> => {
+    logger.info('⚡️ Shutdown signal received');
+    
+    server.close(() => {
+      logger.info('✅ Server closed');
+      process.exit(0);
+    });    
+    // Force exit after timeout
+    setTimeout(() => {
+      logger.error('❗️ Forced exit');
+      process.exit(1);
+    }, 10_000).unref();
+  };
+
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
+}
+
 // Initialize Express app
 const app = express();
 const port = process.env.PORT || 4500;
@@ -59,7 +78,7 @@ app.post('/register', (req: Request, res: Response) => {
     // Update existing instance
     existingInstance.lastHeartbeat = new Date();
     existingInstance.status = 'active';
-    logger.info(`Service instance heartbeat received: ${name} at ${url}`);
+    // logger.debug(`Service instance heartbeat received: ${name} at ${url}`);
   } else {
     // Add new instance
     registry[name].push({
@@ -205,7 +224,7 @@ function cleanupInactiveInstances(): void {
 }
 
 // Start the server
-app.listen(port, () => {
+const server = app.listen(port, () => {
   logger.info(`Service Registry listening on port ${port}`);
   
   // Set up periodic cleanup of inactive services
@@ -216,3 +235,5 @@ app.listen(port, () => {
   logger.info(`Cleanup interval: ${CLEANUP_INTERVAL}ms`);
   logger.info(`Heartbeat timeout: ${HEARTBEAT_TIMEOUT}ms`);
 });
+
+setupGracefulShutdown(server);
