@@ -1,4 +1,4 @@
-import 'dotenv/config'; // ensure CLERK_PUBLISHABLE_KEY & CLERK_SECRET_KEY are loaded
+// import 'dotenv/config'; // ensure CLERK_PUBLISHABLE_KEY & CLERK_SECRET_KEY are loaded
 import { Express, Request, Response, NextFunction, RequestHandler } from 'express';
 import {
   clerkMiddleware,

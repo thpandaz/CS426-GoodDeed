@@ -78,7 +78,7 @@ app.post('/register', (req: Request, res: Response) => {
     // Update existing instance
     existingInstance.lastHeartbeat = new Date();
     existingInstance.status = 'active';
-    logger.info(`Service instance heartbeat received: ${name} at ${url}`);
+    // logger.debug(`Service instance heartbeat received: ${name} at ${url}`);
   } else {
     // Add new instance
     registry[name].push({
