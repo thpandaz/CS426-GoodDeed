@@ -29,21 +29,12 @@ const sanitizeBodyAndParams = (req: Request, _res: Response, next: NextFunction)
 
 async function sendHeartbeat(): Promise<void> {
   try {
-    // If registry URL is configured, register with it
-    if (env.REGISTRY_URL) {
-      await axios.post(`${env.REGISTRY_URL}/register`, {
-        name: env.SERVICE_NAME,
-        url: `http://${env.HOST}:${env.PORT}`,
-      });
-      logger.debug('💓 Heartbeat sent to registry');
-    } else {
-      // Use the legacy registry logic if registry is not configured
-      await axios.post(`${env.REGISTRY_URL}/register`, {
-        name: env.SERVICE_NAME,
-        url: `http://${env.HOST}:${env.PORT}`,
-      });
-      logger.debug('💓 Heartbeat sent to legacy registry');
-    }
+    // Use direct registry URL
+    await axios.post(`${env.REGISTRY_URL}/register`, {
+      name: env.SERVICE_NAME,
+      url: `http://${env.HOST}:${env.PORT}`,
+    });
+    logger.debug('💓 Heartbeat sent to registry');
   } catch (err: any) {
     logger.error('💔 Heartbeat failed', { message: err.message });
   }
@@ -108,6 +99,17 @@ async function start(): Promise<void> {
 
     // Data Sanitization
     app.use(sanitizeBodyAndParams);
+
+    // Health Check Endpoint
+    app.get('/health', (req: Request, res: Response) => {
+      res.status(200).json({
+        status: 'ok',
+        service: env.SERVICE_NAME,
+        timestamp: new Date().toISOString(),
+        version: process.env.npm_package_version || '0.0.0',
+        environment: env.NODE_ENV
+      });
+    });
 
     // API Routes
     app.use('/service-name-template/v1', appRouter);

@@ -13,6 +13,7 @@ const serviceUrls = {
   auth: getEnvVar('AUTH_SERVICE_URL', 'http://localhost:4003'),
   notifications: getEnvVar('NOTIFICATIONS_SERVICE_URL', 'http://localhost:4004'),
   search: getEnvVar('SEARCH_SERVICE_URL', 'http://localhost:4005'),
+  service_template: getEnvVar('SERVICE_TEMPLATE_URL', 'http://localhost:3000'),
 };
 
 // Redis configuration
@@ -112,6 +113,28 @@ const gatewayConfig: GatewayConfig = {
         circuitBreakerOptions: {
           name: 'search-service',
           timeout: 10000, // Search can take longer
+          errorThresholdPercentage: 50,
+          resetTimeout: 30000,
+        },
+        cacheOptions: {
+          ttl: 60,
+          methods: ['GET'],
+          store: useRedis ? 'redis' : 'memory',
+          redisUrl
+        }
+      }
+    },
+    
+    // Service Template
+    {
+      name: 'service_template',
+      path: '/api/service-template',
+      target: serviceUrls.service_template,
+      options: {
+        pathRewrite: { '^/api/service-template': '' },
+        circuitBreakerOptions: {
+          name: 'service-template',
+          timeout: 5000,
           errorThresholdPercentage: 50,
           resetTimeout: 30000,
         },
