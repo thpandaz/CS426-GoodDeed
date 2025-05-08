@@ -29,23 +29,53 @@ const sanitizeBodyAndParams = (req: Request, _res: Response, next: NextFunction)
 
 async function sendHeartbeat(): Promise<void> {
   try {
-    await axios.post(`${env.REGISTRY_URL}/register`, {
-      name: env.SERVICE_NAME,
-      url: `http://${env.HOST}:${env.PORT}`,
-    });
-    logger.debug('💓 Heartbeat sent');
+    // If registry URL is configured, register with it
+    if (env.REGISTRY_URL) {
+      await axios.post(`${env.REGISTRY_URL}/register`, {
+        name: env.SERVICE_NAME,
+        url: `http://${env.HOST}:${env.PORT}`,
+      });
+      logger.debug('💓 Heartbeat sent to registry');
+    } else {
+      // Use the legacy registry logic if registry is not configured
+      await axios.post(`${env.REGISTRY_URL}/register`, {
+        name: env.SERVICE_NAME,
+        url: `http://${env.HOST}:${env.PORT}`,
+      });
+      logger.debug('💓 Heartbeat sent to legacy registry');
+    }
   } catch (err: any) {
     logger.error('💔 Heartbeat failed', { message: err.message });
   }
 }
 
+async function deregisterService(): Promise<void> {
+  try {
+    if (env.REGISTRY_URL) {
+      await axios.post(`${env.REGISTRY_URL}/deregister`, {
+        name: env.SERVICE_NAME,
+        url: `http://${env.HOST}:${env.PORT}`,
+      });
+      logger.info('Service deregistered from registry');
+    }
+  } catch (err: any) {
+    logger.error('Failed to deregister service', { message: err.message });
+  }
+}
+
 function setupGracefulShutdown(server: ReturnType<typeof express.application.listen>): void {
-  const shutdown = (): void => {
+  const shutdown = async (): Promise<void> => {
     logger.info('⚡️ Shutdown signal received');
+    
+    // Deregister from service registry
+    await deregisterService();
+    
     server.close(() => {
       logger.info('✅ Server closed');
       process.exit(0);
     });
+    
+    // Force exit after timeout
     setTimeout(() => {
       logger.error('❗️ Forced exit');
       process.exit(1);
@@ -94,7 +124,7 @@ async function start(): Promise<void> {
     // Graceful Shutdown
     setupGracefulShutdown(server);
 
-    // Heartbeat to Registry
+    // Register with registry and start heartbeat
     await sendHeartbeat();
     setInterval(sendHeartbeat, env.HEARTBEAT_INTERVAL_MS);
   } catch (err: any) {
