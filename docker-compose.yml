@@ -19,13 +19,51 @@ services:
       PORT: "3000"
       MONGO_URI: "mongodb://mongo:27017"    # use the mongo service name
       MONGO_DB_NAME: "user_db"
+      REGISTRY_URL: "http://registry:3000" # Added for registry communication
     depends_on:
       - mongo
+      - registry # Added dependency on registry
     restart: always
     ports:
       - "3000:3000"                         # host:container
     volumes:
       - ./apps/services_template/logs:/apps/logs
+    networks:
+      - app_network
+
+  registry:
+    container_name: registry_service
+    build:
+      context: .
+      dockerfile: ./apps/registry/Dockerfile
+    environment:
+      PORT: "3000" # Internal port for the registry service
+    restart: always
+    ports:
+      - "3002:3000" # Exposing registry service on host port 3002
+    volumes:
+      - ./apps/registry/logs:/apps/logs # Assuming logs directory
+    networks:
+      - app_network
+
+  users:
+    container_name: users_service
+    build:
+      context: .
+      dockerfile: ./apps/users/Dockerfile
+    environment:
+      PORT: "3000" # Internal port for the users service
+      MONGO_URI: "mongodb://mongo:27017"
+      MONGO_DB_NAME: "users_db" # A separate DB for users
+      REGISTRY_URL: "http://registry:3000"
+    depends_on:
+      - mongo
+      - registry 
+    restart: always
+    ports:
+      - "3001:3000" # Exposing users service on host port 3001
+    volumes:
+      - ./apps/users/logs:/apps/logs
     networks:
       - app_network
 
