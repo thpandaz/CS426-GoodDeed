@@ -5,7 +5,7 @@ WORKDIR /app
 # Install pnpm globally
 RUN npm install -g pnpm
 
-# Install curl (as in original)
+# Install curl
 RUN apk add --no-cache curl
 
 # Copy pnpm-specific files, root package.json, and turbo.json
@@ -24,15 +24,10 @@ COPY packages/ ./packages/
 RUN pnpm install --filter users... --frozen-lockfile
 
 # Copy all source code from the monorepo root.
-# Turbo will use this to build the 'users' service and its dependencies.
 COPY . .
 
 # Build only the 'users' service and its dependencies using turbo.
-# The 'users' package's build script (e.g., "tsc") will be executed.
 RUN pnpm turbo run build --filter=users
 
 # Command to start the 'users' service.
-# The build output for 'users' (from 'tsc') is typically in 'dist/index.js'
-# relative to the 'apps/users' directory.
-# So, the path inside the container will be /app/apps/users/dist/index.js.
 CMD ["node", "apps/users/dist/index.js"]
