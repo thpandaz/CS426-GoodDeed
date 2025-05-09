@@ -60,6 +60,23 @@ services:
       - app_network
     expose:
       - "3001"
+  
+  users:
+    build:
+      context: .
+      dockerfile: ./apps/users/Dockerfile
+    container_name: users
+    environment:
+      NODE_ENV: "development"
+      HOST: "0.0.0.0"
+      PORT: "3000"
+    depends_on:
+      - mongo
+      - registry
+    networks:
+      - app_network
+    expose:
+      - "3000"
 
   web:
     build:
