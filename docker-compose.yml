@@ -46,7 +46,7 @@ services:
     networks:
       - app_network
 
-  users: # New service for users
+  users:
     container_name: users_service
     build:
       context: .
@@ -54,16 +54,16 @@ services:
     environment:
       PORT: "3000" # Internal port for the users service
       MONGO_URI: "mongodb://mongo:27017"
-      MONGO_DB_NAME: "users_db" # Assuming a separate DB for users
-      REGISTRY_URL: "http://registry:3000" # Ensure users service knows where the registry is
+      MONGO_DB_NAME: "users_db" # A separate DB for users
+      REGISTRY_URL: "http://registry:3000"
     depends_on:
       - mongo
-      - registry # Added dependency on registry
+      - registry 
     restart: always
     ports:
       - "3001:3000" # Exposing users service on host port 3001
     volumes:
-      - ./apps/users/logs:/apps/logs # Assuming logs directory similar to services_template
+      - ./apps/users/logs:/apps/logs
     networks:
       - app_network
 
