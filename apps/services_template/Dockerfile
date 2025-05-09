@@ -55,5 +55,7 @@ COPY --from=installer /apps ./
 
 VOLUME ["/apps/logs"]
 
+RUN rm -rf /packages/*/src
+
 # run without tsconfig-paths preloading since alias paths are already rewritten
 CMD ["node", "apps/services_template/dist/index.js"]

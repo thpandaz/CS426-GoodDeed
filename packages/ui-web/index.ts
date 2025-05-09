@@ -2,7 +2,7 @@ import "lucide-react"
 // utils
 
 // components
-export { Header } from "./src/components/Header";
+export { Header } from "./src/components/header";
 export { Counter } from "./src/lib/counter";
 export { NavBar } from "./src/components/navbar";
 export { default as Footer } from "./src/components/footer";
