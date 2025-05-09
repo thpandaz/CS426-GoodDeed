@@ -3,31 +3,163 @@ services:
     image: mongo:6
     container_name: mongo_template
     restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
     networks:
       - app_network
+    volumes:
+      - mongo-data:/data/db
+    expose:
+      - "27017"
 
   services_template:
-    container_name: services_0
     build:
       context: .
       dockerfile: ./apps/services_template/Dockerfile
+    container_name: services_template
     environment:
+      NODE_ENV: "development"
+      HOST: "0.0.0.0"  # Changed from localhost to 0.0.0.0 for container
       PORT: "3000"
-      MONGO_URI: "mongodb://mongo:27017"    # use the mongo service name
-      MONGO_DB_NAME: "user_db"
+      # CORS_ORIGINS: "*"
+      COMMON_RATE_LIMIT_MAX_REQUESTS: "1000"
+      COMMON_RATE_LIMIT_WINDOW_MS: "1000"
+      MONGO_URI: "mongodb://mongo:27017"
+      MONGO_DB_NAME: "test_db"
+      REGISTRY_URL: "http://registry:5000"
+      SERVICE_NAME: "service_template"
+      HEARTBEAT_INTERVAL_MS: "5000"
     depends_on:
       - mongo
+      - registry
     restart: always
-    ports:
-      - "3000:3000"                         # host:container
-    volumes:
-      - ./apps/services_template/logs:/apps/logs
     networks:
       - app_network
+    expose:
+      - "3000"
+
+  organizations:
+    build:
+      context: .
+      dockerfile: ./apps/organizations/Dockerfile
+    container_name: organizations
+    environment:
+      NODE_ENV: "development"
+      HOST: "0.0.0.0"
+      PORT: "3001"
+      # CORS_ORIGINS: "*"
+      COMMON_RATE_LIMIT_MAX_REQUESTS: "1000"
+      COMMON_RATE_LIMIT_WINDOW_MS: "1000"
+      MONGO_URI: "mongodb://mongo:27017"
+      MONGO_DB_NAME: "organizations_db"
+      REGISTRY_URL: "http://registry:5000"
+      SERVICE_NAME: "organizations"
+      HEARTBEAT_INTERVAL_MS: "5000"
+    depends_on:
+      - mongo
+      - registry
+    networks:
+      - app_network
+    expose:
+      - "3001"
+
+  web:
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+    container_name: web
+    environment:
+      VITE_CLERK_PUBLISHABLE_KEY: "pk_test_bmV4dC1jYWxmLTk5LmNsZXJrLmFjY291bnRzLmRldiQ"
+      VITE_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: "/dashboard"
+      VITE_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: "/signup"
+      MODE: "development"
+    ports:
+      - "8000:80"  # Default Vite dev server port
+    networks:
+      - app_network
+    depends_on:
+      - api-gateway
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ./apps/api-gateway/Dockerfile
+    container_name: api-gateway
+    environment:
+      NODE_ENV: "development"
+      PORT: "4000"
+      REDIS_URL: "redis://redis:6379"
+      SERVICE_REGISTRY_URL: "http://registry:5000"
+      SERVICE_TEMPLATE_URL: "http://services_template:3000"
+      ORGANIZATIONS_URL: "http://organizations:3001"
+      # CORS_ORIGINS: ""
+    ports:
+      - "4000:4000"
+    depends_on:
+      - registry
+      - services_template
+      - organizations
+      - redis
+    networks:
+      - app_network
+
+  registry:
+    build:
+      context: .
+      dockerfile: ./apps/registry/Dockerfile
+    container_name: registry
+    environment:
+      NODE_ENV: "development"
+      PORT: "5000"
+      LOG_LEVEL: "info"
+      HEARTBEAT_INTERVAL_MS: "30000"
+      CLEANUP_INTERVAL_MS: "60000"
+      HEARTBEAT_TIMEOUT_MS: "90000"
+    ports:
+      - "5000:5000"
+    networks:
+      - app_network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - app_network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+      - grafana-data:/var/lib/grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "admin"  # Change this in production
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    networks:
+      - app_network
+    depends_on:
+      - prometheus
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - app_network
+    expose:
+      - "6379"
 
 networks:
   app_network:
@@ -35,4 +167,10 @@ networks:
 
 volumes:
   mongo-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  redis-data:
     driver: local

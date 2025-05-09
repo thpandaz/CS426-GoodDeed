@@ -12,7 +12,7 @@ const serviceUrls = {
   // auth: getEnvVar('AUTH_SERVICE_URL', 'http://localhost:4003'),
   // notifications: getEnvVar('NOTIFICATIONS_SERVICE_URL', 'http://localhost:4004'),
   // search: getEnvVar('SEARCH_SERVICE_URL', 'http://localhost:4005'),
-  organizations: getEnvVar('ORGANIZATIONS_SERVICE_URL', 'http://localhost:4006'),
+  organizations: getEnvVar('ORGANIZATIONS_URL', 'http://localhost:3001'),
   opportunities: getEnvVar('OPPORTUNITIES_SERVICE_URL', 'http://localhost:4007'),
   service_template: getEnvVar('SERVICE_TEMPLATE_URL', 'http://localhost:3000'),
 };
@@ -153,9 +153,9 @@ const gatewayConfig: GatewayConfig = {
       path: '/api/organizations',
       target: serviceUrls.organizations,
       options: {
-        pathRewrite: { '^/api/service-template': '' },
+        pathRewrite: { '^/api/organizations': '' },
         circuitBreakerOptions: {
-          name: 'service-template',
+          name: 'organizations',
           timeout: 5000,
           errorThresholdPercentage: 50,
           resetTimeout: 30000,
@@ -174,7 +174,7 @@ const gatewayConfig: GatewayConfig = {
       path: '/api/opportunities',
       target: serviceUrls.opportunities,
       options: {
-        pathRewrite: { '^/api/opportunities': '/opportunities' },
+        pathRewrite: { '^/api/opportunities': '' },
         circuitBreakerOptions: {
           name: 'opportunities-service',
           timeout: 5000,

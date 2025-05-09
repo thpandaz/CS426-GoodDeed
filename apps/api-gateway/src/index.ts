@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import compression from 'compression';
-import { baseLogger, rateLimiter } from '@repo/middleware';
+import { baseLogger, rateLimiter, metricsMiddleware, metricsEndpoint } from '@repo/middleware';
 import { env } from '@repo/utils';
 
 // Import local middleware and config
@@ -46,6 +46,7 @@ app.use(compression()); // Compress responses
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(rateLimiter); // Rate limiting
+app.use(metricsMiddleware);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -55,6 +56,9 @@ app.get('/health', (req, res) => {
     version: process.env.npm_package_version || 'unknown',
   });
 });
+
+app.get('/metrics', metricsEndpoint);
+
 
 // Try to use circuit breaker health router if available
 try {

@@ -1,0 +1,15 @@
+﻿global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'api-gateway'
+    static_configs:
+      - targets: ['api-gateway:4000']
+
+  - job_name: 'services'
+    static_configs:
+      - targets: ['services_template:3000', 'organizations:3001']
+
+  - job_name: 'registry'
+    static_configs:
+      - targets: ['registry:5000']
