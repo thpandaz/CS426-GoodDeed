@@ -34,7 +34,7 @@ const gatewayConfig: GatewayConfig = {
       path: '/api/users',
       target: serviceUrls.users,
       options: {
-        pathRewrite: { '^/api/users': '/users' },
+        pathRewrite: { '^/api/users': '' }, // Changed from '/users' to ''
         circuitBreakerOptions: {
           name: 'users-service',
           timeout: 5000,
@@ -213,4 +213,4 @@ const gatewayConfig: GatewayConfig = {
   }
 };
 
-export default gatewayConfig; 
+export default gatewayConfig;
