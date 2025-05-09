@@ -1,6 +1,6 @@
 import { Express, Request, Response, NextFunction, RequestHandler } from 'express';
 import { createProxyMiddleware, Options as ProxyOptions } from 'http-proxy-middleware';
-import { baseLogger } from '@repo/middleware';
+import { baseLogger, circuit, createCacheMiddleware } from '@repo/middleware';
 import type { ServiceConfig, ServiceRegistry } from '../types/index.js';
 
 const logger = baseLogger.child({ module: 'RouteSetup' });
@@ -14,10 +14,8 @@ export function setupCircuitBreaker(service: ServiceConfig): RequestHandler | nu
   }
   
   try {
-    // Dynamically import circuit module from middleware
-    const middleware = require('@repo/middleware');
-    
-    if (!middleware.circuit || typeof middleware.circuit.createBreaker !== 'function') {
+    // Use imported circuit module directly
+    if (!circuit || typeof circuit.createBreaker !== 'function') {
       logger.warn(`Circuit breaker middleware not available for ${service.name}`);
       return null;
     }
@@ -28,7 +26,7 @@ export function setupCircuitBreaker(service: ServiceConfig): RequestHandler | nu
     };
     
     logger.info(`Creating circuit breaker for ${service.name}`, { options });
-    return middleware.circuit.createBreaker(options).middleware;
+    return circuit.createBreaker(options).middleware;
   } catch (error) {
     logger.error(`Failed to create circuit breaker for ${service.name}`, {
       error: error instanceof Error ? error.message : String(error)
@@ -46,10 +44,8 @@ export function setupCache(service: ServiceConfig): RequestHandler | null {
   }
   
   try {
-    // Dynamically import cache module from middleware
-    const middleware = require('@repo/middleware');
-    
-    if (!middleware.createCacheMiddleware || typeof middleware.createCacheMiddleware !== 'function') {
+    // Use imported createCacheMiddleware directly
+    if (!createCacheMiddleware || typeof createCacheMiddleware !== 'function') {
       logger.warn(`Cache middleware not available for ${service.name}`);
       return null;
     }
@@ -60,7 +56,7 @@ export function setupCache(service: ServiceConfig): RequestHandler | null {
     };
     
     logger.info(`Creating cache middleware for ${service.name}`, { options });
-    return middleware.createCacheMiddleware(options);
+    return createCacheMiddleware(options);
   } catch (error) {
     logger.error(`Failed to create cache for ${service.name}`, {
       error: error instanceof Error ? error.message : String(error)
@@ -86,9 +82,10 @@ export function setupRoutes(app: Express, services: ServiceConfig[], serviceRegi
     
     // Create proxy middleware for this service
     const proxyOptions: ProxyOptions = {
+      target,  
       changeOrigin: true,
       pathRewrite: options?.pathRewrite,
-      router: (req) => targetSelector(req),  
+      // router: (req) => targetSelector(req), haven't deployed the instances yet
       logLevel: 'silent', // We handle our own logging
       logProvider: () => ({
         log: (msg: string) => logger.debug(msg),
@@ -135,7 +132,9 @@ export function setupRoutes(app: Express, services: ServiceConfig[], serviceRegi
         if (options?.onError) {
           options.onError(err, req, res as Response, next as NextFunction);
         } else {
-          const statusCode = (err.cause as any)?.code === 'ECONNREFUSED' ? 503 : 500;
+          // Safely check for the cause code
+          const statusCode = (err.cause && (err.cause as any).code === 'ECONNREFUSED') ? 503 : 500;
+          
           if (!res.headersSent) {
             res.status(statusCode).json({
               error: {

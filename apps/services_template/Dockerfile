@@ -38,6 +38,11 @@ RUN pnpm turbo build
 FROM node:23-alpine AS runner
 WORKDIR /apps
 
+COPY --from=installer /apps ./
+
+RUN rm -rf /apps/packages/*/src
+RUN rm -rf /apps/apps/services_template/src
+
 # drop root privileges
 RUN addgroup --system --gid 1001 expressjs \
  && adduser  --system --uid 1001 \
@@ -50,10 +55,6 @@ RUN mkdir -p logs \
  
 USER expressjs
 
-# copy only built files & prod deps
-COPY --from=installer /apps ./
-
 VOLUME ["/apps/logs"]
-
 # run without tsconfig-paths preloading since alias paths are already rewritten
 CMD ["node", "apps/services_template/dist/index.js"]

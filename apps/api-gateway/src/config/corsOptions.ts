@@ -33,7 +33,7 @@ const getAllowedOrigins = (): string[] => {
  * CORS configuration options
  */
 const corsOptions: CorsOptions = {
-  origin: (origin, callback) => {
+  origin: env.isDev ? true : (origin, callback) => {
     // Allow server-to-server requests (no origin)
     if (!origin) {
       return callback(null, true);

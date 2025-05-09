@@ -20,12 +20,6 @@ if (!SIGN_IN_REDIRECT) {
 if (!SIGN_UP_REDIRECT) {
   throw new Error("Missing Sign Up Fallback Redirect URL")
 }
-
-console.log(
-  'Mode:', import.meta.env.MODE,
-  'Clerk Key:', import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-)
-
 // const navigate = useNavigate()
 
 ReactDOM.createRoot(document.getElementById("app")!).render(

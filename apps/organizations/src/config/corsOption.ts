@@ -3,7 +3,30 @@
  */
 import { env } from "@repo/utils";
 
-const whitelist = env.CORS_ORIGINS;
+const getAllowedOrigins = (): string[] => {
+    // Check if origins are defined in environment
+    if (env.CORS_ORIGINS && env.CORS_ORIGINS.length > 0) {
+      return env.CORS_ORIGINS;
+    }
+    
+    // Default origins based on environment
+    if (env.isDev) {
+      return [
+        'http://localhost:3000',   // Web frontend
+        'http://localhost:5173',   // Vite dev server
+        'http://localhost:8000',   // Alternative dev port
+      ];
+    }
+    
+    if (env.isProd) {
+      return [
+        'https://gooddeed.example.com',  // Replace with actual production domains
+        'https://*.gooddeed.example.com'
+      ];
+    }
+    
+    return ['*']; // Fallback
+  };
 
 const corsOptions = {
     /**
@@ -11,19 +34,7 @@ const corsOptions = {
      * @param origin - The request origin.
      * @param callback - The callback function to be called with the result.
      */
-    origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) {
-            callback(null, true);
-            return;
-        }
-
-        if (whitelist.indexOf(origin) !== -1 || env.NODE_ENV === 'development') {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: getAllowedOrigins(),
     credentials: true,
     optionsSuccessStatus: 200,
 };

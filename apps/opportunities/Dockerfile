@@ -38,6 +38,11 @@ RUN pnpm turbo build
 FROM node:23-alpine AS runner
 WORKDIR /apps
 
+COPY --from=installer /apps ./
+
+RUN rm -rf /apps/packages/*/src
+RUN rm -rf /apps/apps/opportunities/src
+
 # drop root privileges
 RUN addgroup --system --gid 1001 expressjs \
  && adduser  --system --uid 1001 \
@@ -49,9 +54,6 @@ RUN mkdir -p logs \
  && chown expressjs:expressjs logs
  
 USER expressjs
-
-# copy only built files & prod deps
-COPY --from=installer /apps ./
 
 VOLUME ["/apps/logs"]
 

@@ -51,7 +51,11 @@ export default defineConfig({
    },
     allowedHosts: ['all', '0cda-128-119-202-12.ngrok-free.app'],
   },
+  preview: {
+    port: 8000,
+  },
   build: {
     sourcemap: true,
+    outDir: 'dist',
   },
 });
