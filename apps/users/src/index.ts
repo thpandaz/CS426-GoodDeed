@@ -94,7 +94,7 @@ const UserSchema = new Schema<IUserDocument>({
 
 const UserModel = mongoose.model<IUserDocument>("User", UserSchema);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4001;
 const REGISTRY_URL = process.env.REGISTRY_URL || "http://registry:5001";
 const MONGO_URI = process.env.MONGO_URI || "mongodb://mongo:27017";
 const MONGO_DB_NAME = process.env.MONGO_DB_NAME || "users_db";
