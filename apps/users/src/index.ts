@@ -94,8 +94,8 @@ const UserSchema = new Schema<IUserDocument>({
 
 const UserModel = mongoose.model<IUserDocument>("User", UserSchema);
 
-const PORT = process.env.PORT || 3000;
-const REGISTRY_URL = process.env.REGISTRY_URL || "http://registry:3000";
+const PORT = process.env.PORT || 4001;
+const REGISTRY_URL = process.env.REGISTRY_URL || "http://registry:5001";
 const MONGO_URI = process.env.MONGO_URI || "mongodb://mongo:27017";
 const MONGO_DB_NAME = process.env.MONGO_DB_NAME || "users_db";
 
@@ -103,6 +103,15 @@ const log = pino({ transport: { target: "pino-pretty" } });
 
 const app = express();
 app.use(express.json());
+
+// GET /health - Health check endpoint
+app.get("/health", (req: Request, res: Response) => {
+    res.status(200).json({
+        status: "ok",
+        timestamp: new Date().toISOString(),
+        service: "users"
+    });
+});
 
 async function connectDB() {
     const dbUri = `${MONGO_URI}/${MONGO_DB_NAME}`;
@@ -116,7 +125,7 @@ async function connectDB() {
     }
 }
 
-async function registerWithRetry(name: string, url: string, maxRetries = 5) {
+async function registerWithRetry(name: string, url: string, maxRetries = 15) {
     for (let i = 0; i < maxRetries; i++) {
         try {
             const res = await fetch(`${REGISTRY_URL}/register`, {

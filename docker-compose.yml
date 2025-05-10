@@ -24,7 +24,7 @@ services:
       COMMON_RATE_LIMIT_WINDOW_MS: "1000"
       MONGO_URI: "mongodb://mongo:27017"
       MONGO_DB_NAME: "test_db"
-      REGISTRY_URL: "http://registry:5000"
+      REGISTRY_URL: "http://registry:5001"
       SERVICE_NAME: "service_template"
       HEARTBEAT_INTERVAL_MS: "5000"
     depends_on:
@@ -50,7 +50,7 @@ services:
       COMMON_RATE_LIMIT_WINDOW_MS: "1000"
       MONGO_URI: "mongodb://mongo:27017"
       MONGO_DB_NAME: "organizations_db"
-      REGISTRY_URL: "http://registry:5000"
+      REGISTRY_URL: "http://registry:5001"
       SERVICE_NAME: "organizations"
       HEARTBEAT_INTERVAL_MS: "5000"
     depends_on:
@@ -69,14 +69,19 @@ services:
     environment:
       NODE_ENV: "development"
       HOST: "0.0.0.0"
-      PORT: "3000"
+      PORT: "4001"
+      MONGO_URI: "mongodb://mongo:27017"
+      MONGO_DB_NAME: "users_db"
+      REGISTRY_URL: "http://registry:5001"
+      SERVICE_NAME: "users"
+      HEARTBEAT_INTERVAL_MS: "5000"
     depends_on:
       - mongo
       - registry
     networks:
       - app_network
     expose:
-      - "3000"
+      - "4001"
 
   web:
     build:
@@ -103,10 +108,12 @@ services:
     environment:
       NODE_ENV: "development"
       PORT: "4000"
+      
       REDIS_URL: "redis://redis:6379"
-      SERVICE_REGISTRY_URL: "http://registry:5000"
+      SERVICE_REGISTRY_URL: "http://registry:5001"
       SERVICE_TEMPLATE_URL: "http://services_template:3000"
       ORGANIZATIONS_URL: "http://organizations:3001"
+      USERS_SERVICE_URL: "http://users:4001"
       # CORS_ORIGINS: ""
     ports:
       - "4000:4000"
@@ -125,13 +132,13 @@ services:
     container_name: registry
     environment:
       NODE_ENV: "development"
-      PORT: "5000"
+      PORT: "5001"
       LOG_LEVEL: "info"
       HEARTBEAT_INTERVAL_MS: "30000"
       CLEANUP_INTERVAL_MS: "60000"
       HEARTBEAT_TIMEOUT_MS: "90000"
     ports:
-      - "5000:5000"
+      - "5001:5001"
     networks:
       - app_network
 
