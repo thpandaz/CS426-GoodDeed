@@ -95,7 +95,7 @@ const UserSchema = new Schema<IUserDocument>({
 const UserModel = mongoose.model<IUserDocument>("User", UserSchema);
 
 const PORT = process.env.PORT || 3000;
-const REGISTRY_URL = process.env.REGISTRY_URL || "http://registry:3000";
+const REGISTRY_URL = process.env.REGISTRY_URL || "http://registry:5001";
 const MONGO_URI = process.env.MONGO_URI || "mongodb://mongo:27017";
 const MONGO_DB_NAME = process.env.MONGO_DB_NAME || "users_db";
 
@@ -116,7 +116,7 @@ async function connectDB() {
     }
 }
 
-async function registerWithRetry(name: string, url: string, maxRetries = 5) {
+async function registerWithRetry(name: string, url: string, maxRetries = 15) {
     for (let i = 0; i < maxRetries; i++) {
         try {
             const res = await fetch(`${REGISTRY_URL}/register`, {
