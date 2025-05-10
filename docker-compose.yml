@@ -69,7 +69,7 @@ services:
     environment:
       NODE_ENV: "development"
       HOST: "0.0.0.0"
-      PORT: "3000"
+      PORT: "4001"
       MONGO_URI: "mongodb://mongo:27017"
       MONGO_DB_NAME: "users_db"
       REGISTRY_URL: "http://registry:5001"
@@ -81,7 +81,7 @@ services:
     networks:
       - app_network
     expose:
-      - "3000"
+      - "4001"
 
   web:
     build:
@@ -108,10 +108,12 @@ services:
     environment:
       NODE_ENV: "development"
       PORT: "4000"
+      
       REDIS_URL: "redis://redis:6379"
       SERVICE_REGISTRY_URL: "http://registry:5001"
       SERVICE_TEMPLATE_URL: "http://services_template:3000"
       ORGANIZATIONS_URL: "http://organizations:3001"
+      USERS_SERVICE_URL: "http://users:4001"
       # CORS_ORIGINS: ""
     ports:
       - "4000:4000"

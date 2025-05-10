@@ -104,6 +104,15 @@ const log = pino({ transport: { target: "pino-pretty" } });
 const app = express();
 app.use(express.json());
 
+// GET /health - Health check endpoint
+app.get("/health", (req: Request, res: Response) => {
+    res.status(200).json({
+        status: "ok",
+        timestamp: new Date().toISOString(),
+        service: "users"
+    });
+});
+
 async function connectDB() {
     const dbUri = `${MONGO_URI}/${MONGO_DB_NAME}`;
     log.info(`Attempting to connect to MongoDB at: ${dbUri}`);
